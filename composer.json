@@ -1,0 +1,25 @@
+{
+  "name": "georgique/yii2-jsonrpc",
+  "description": "Yii2 JSON-RPC server implementation",
+  "keywords": ["yii2", "bootstrap", "json-rpc"],
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "George Shestayev",
+      "email": "george.shestayev@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": ">=2.0.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "georgique\\yii2\\jsonrpc\\": ""
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
