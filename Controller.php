@@ -2,6 +2,16 @@
 
 namespace georgique\yii2\jsonrpc;
 
+use Yii;
+use yii\filters\ContentNegotiator;
+use yii\web\Response;
+
+const JSON_RPC_ERROR_PARSE = -32700;
+const JSON_RPC_ERROR_REQUEST_INVALID = -32600;
+const JSON_RPC_ERROR_METHOD_NOT_FOUND = -32601;
+const JSON_RPC_ERROR_METHOD_PARAMS_INVALID = -32602;
+const JSON_RPC_ERROR_INTERNAL = -32603;
+
 class Controller extends \yii\web\Controller {
 
     public function actions()
@@ -19,10 +29,23 @@ class Controller extends \yii\web\Controller {
     public function behaviors()
     {
         return [
-            'jsonRpcFilter' => [
-                'class' => JsonRpcFilter::className(),
-            ],
+            'contentNegotiator' => [
+                'class' => ContentNegotiator::className(),
+                'formats' => [
+                    '*' => Response::FORMAT_JSON,
+                ],
+            ]
         ];
+    }
+
+    public function beforeAction($action)
+    {
+        if ($action == 'index') {
+            // Replace error handler, so error response is a correct JSON-RPC one
+            Yii::$app->set('errorHandler', ['class' => ErrorHandler::className()]);
+        }
+
+        return true;
     }
 
 }
