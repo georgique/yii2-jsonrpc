@@ -1,4 +1,3 @@
-
 # yii2-jsonrpc
 
 This is Yii2-based JSON-RPC server implementation. CURRENTLY IN DEVELOPMENT. CONTRIBUTION WELCOME.
@@ -7,18 +6,15 @@ This is Yii2-based JSON-RPC server implementation. CURRENTLY IN DEVELOPMENT. CON
 * Uses full Yii2 power, because method string is translated into a route. You can keep using all the Yii2 feature
 such as routing, access control, etc.
 Examples:
-`{jsonrpc: "2.0", "method": "foo", "id": 1} -> route /foo -> {action: foo, controller: index, module: default}`
-`{jsonrpc: "2.0", "method": "foo.bar": "id": 2} -> route /foo/bar -> {action: bar, controller: foo, module: default}`
-`{jsonrpc: "2.0", "method": "foo.bar.baz": "id": 3} -> route /foo/bar/baz -> {action: baz, controller: bar, module: foo}`
+```
+{jsonrpc: "2.0", "method": "foo", "id": 1} -> route /foo -> {action: foo, controller: index, module: default}
+{jsonrpc: "2.0", "method": "foo.bar": "id": 2} -> route /foo/bar -> {action: bar, controller: foo, module: default}
+{jsonrpc: "2.0", "method": "foo.bar.baz": "id": 3} -> route /foo/bar/baz -> {action: baz, controller: bar, module: foo}
+```
 * Supports batch processing.
 
-## Usage notes
-* Method is not translated to route as an URL. It should contain actual actual module name, controller and route splitted by dots. So if you have a following URL rule:
-`'do-some-stuff' => 'api1/doer/stuff'`
-your method string should not be `'do-some-stuff'`, but `'api1.doer.stuff'`. Remember that you are just remotely calling procedures, which in Yii2 terms are actions.
-* Note that action is called internally which causes some restrictions on them. One of them is that called action has to approve verb which you use originally for making a JSON-RPC call (most probably it will be GET or POST).
 
-## Examples
+## Usage
 Entry point:
 ```php
 <?php
@@ -26,8 +22,10 @@ Entry point:
 namespace app\controllers;
 
 class JsonRpcController extends \georgique\yii2\json-rpc\Controller {
+
 	// Practically you don't need anything else in this controller, 
 	// unless you want to customize entry point somehow.
+	
 }
 ```
 
@@ -36,13 +34,22 @@ Controller with target actions which we are going to call:
 <?php
 namespace app\modules\api1\controllers;
 
+// There are some minor side-effects of this solutions, because original request is made to the
+// entry point, not to the target controller and action. Be careful working with Request object,
+// especially when working on access restriction to the target actions. For example, you want an
+// action to be reached only with GET verb only, but you do POST request to the endpoint. In that
+// case you will get Internal Error because access will be denied.
 class ExampleController extends \yii\web\Controller {
 
-
+    // Note that URL patterns won't be used to resolve the method - this would not be resourse-wise.
+    // Method string should simply be [[module.]controller.]action where module and controller parts
+    // can be omitted, so default module and index controller will be used.
     public function actionTry() {
         return "You've got it!";
     }
 
+    // Method params are directly translated into action arguments. Make sure your call matches action
+    // signature.
     public function actionTryWithParams($foo) {
         return "Params received: \$foo = $foo.";
     }
