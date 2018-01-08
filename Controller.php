@@ -38,14 +38,12 @@ class Controller extends \yii\web\Controller {
         ];
     }
 
-    public function beforeAction($action)
+    public function init()
     {
-        if ($action == 'index') {
-            // Replace error handler, so error response is a correct JSON-RPC one
-            Yii::$app->set('errorHandler', ['class' => ErrorHandler::className()]);
-        }
+        Yii::$app->set('errorHandler', ['class' => ErrorHandler::className()]);
+        Yii::$app->getErrorHandler()->register();
 
-        return true;
+        parent::init();
     }
 
 }
