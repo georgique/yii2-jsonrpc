@@ -47,7 +47,7 @@ class Action extends \yii\base\Action {
             return false;
         }
 
-        $parts = explode($method, '.');
+        $parts = explode('.', $method);
         foreach ($parts as $part) {
             // There cannot be empty part in route
             if (empty($part)) return false;
@@ -137,13 +137,15 @@ class Action extends \yii\base\Action {
         $route = $request->route;
         try {
             \Yii::trace("Route requested: '$route'", __METHOD__);
-            $this->requestedRoute = $route;
+            \Yii::$app->requestedRoute = $route;
             $result = \Yii::$app->runAction($request->route, $request->params);
             return $result;
         }
         catch (\Exception $exception) {
             if ($exception instanceof InvalidRouteException) {
-                return new Exception('Method not found.', JSON_RPC_ERROR_METHOD_NOT_FOUND);
+                $result = new Exception('Method not found.', JSON_RPC_ERROR_METHOD_NOT_FOUND);
+                $result->data['message'] = $exception->getMessage();
+                return $result;
             }
             else if ($exception instanceof Exception) {
                 return $exception;
