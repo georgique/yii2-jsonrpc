@@ -26,13 +26,13 @@ class Action extends \yii\base\Action {
         try {
             $parameters = Json::decode($rawBody, false);
             if (!$parameters) {
-                throw new Exception('Not a valid JSON-RPC 2.0 request.', JSON_RPC_ERROR_PARSE);
+                throw new Exception('Could not parse JSON-RPC request body - empty result.', JSON_RPC_ERROR_REQUEST_INVALID);
             }
 
             return $parameters;
         }
         catch (Exception $e) {
-            throw new Exception('Not a valid JSON-RPC 2.0 request.', JSON_RPC_ERROR_PARSE);
+            throw new Exception('Could not parse JSON-RPC request.', JSON_RPC_ERROR_PARSE);
         }
     }
 
@@ -43,7 +43,7 @@ class Action extends \yii\base\Action {
      * @return bool|string
      */
     public function parseMethod($method) {
-        if (!preg_match('/^[\d\w_.]+/$', $method)) {
+        if (!preg_match('/^[\d\w_.]+$/', $method)) {
             return false;
         }
 
@@ -65,25 +65,21 @@ class Action extends \yii\base\Action {
      */
     public function parseRequest($request) {
         if (!isset($request->jsonrpc) || $request->jsonrpc !== '2.0') {
-            // TODO Customize error message to make the problem clear
-            throw new Exception("The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_INVALID_REQUEST);
+            throw new Exception("The JSON sent is not a correct JSON-RPC request - missing or incorrect version.", JSON_RPC_ERROR_REQUEST_INVALID);
         }
 
         if (!isset($request->method) || !is_string($request->method) || (!$route = $this->parseMethod($request->method))) {
-            throw new Exception("The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_INVALID_REQUEST);
+            throw new Exception("The JSON sent is not a correct JSON-RPC request - missing or incorrect method.", JSON_RPC_ERROR_REQUEST_INVALID);
         }
 
         $params = null;
         if (isset($request->params)) {
-            if (!is_array($request->params)) {
-                throw new Exception("The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_INVALID_REQUEST);
-            }
-            $params = $request->params;
+            $params = (array) $request->params;
         }
 
         if (!isset($request->id)) {
-            if (!is_scalar($request->id)) {
-                throw new Exception("The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_INVALID_REQUEST);
+            if (!is_int($request->id) && !ctype_digit($request->id)) {
+                throw new Exception("The JSON sent is not a correct JSON-RPC request - incorrect id.", JSON_RPC_ERROR_INVALID_REQUEST);
             }
         }
 
@@ -121,6 +117,7 @@ class Action extends \yii\base\Action {
                     }
                     else {
                         $result = new Exception("Error happened during request parsing.", JSON_RPC_ERROR_INTERNAL);
+                        $result->data['exception'] = $exception->getMessage();
                     }
                 }
                 $results[] = $result;
@@ -152,7 +149,9 @@ class Action extends \yii\base\Action {
                 return $exception;
             }
             else {
-                return new Exception('Internal error.', JSON_RPC_ERROR_INTERNAL);
+                $result = new Exception('Internal error.', JSON_RPC_ERROR_INTERNAL);
+                $result->data['message'] = $exception->getMessage();
+                return $result;
             }
         }
     }
