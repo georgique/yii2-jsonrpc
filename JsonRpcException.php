@@ -3,15 +3,12 @@
 namespace georgique\yii2\jsonrpc;
 
 /**
- * Class Exception
+ * Class JsonRpcException
  * Basic exception class for handling JSON-RPC errors.
  * @author George Shestayev george.shestayev@gmail.com
  * @package georgique\yii2\jsonrpc
  */
-class Exception extends \yii\base\Exception {
-
-    /* @var int Used for identifying request in a batch */
-    public $id;
+class JsonRpcException extends \yii\base\Exception {
 
     /**
      * @return string the user-friendly name of this exception
@@ -42,16 +39,6 @@ class Exception extends \yii\base\Exception {
                     return 'Error';
                 }
         }
-    }
-
-    public function toJsonRpcFormat() {
-        return [
-            'code' => $this->getCode(),
-            'message' => $this->getMessage(),
-            'data' => [
-                // TODO Include some useful data here
-            ]
-        ];
     }
 
 }

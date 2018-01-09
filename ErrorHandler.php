@@ -9,7 +9,7 @@ use yii\web\Response;
 /**
  * Class ErrorHandler
  * This class is supposed to catch any unhandled errors and format them into JSON-RPC response.
- * @autho George Shestayev george.shestayev@gmail.com
+ * @author George Shestayev george.shestayev@gmail.com
  * @package georgique\yii2\jsonrpc
  */
 class ErrorHandler extends \yii\base\ErrorHandler
@@ -45,21 +45,25 @@ class ErrorHandler extends \yii\base\ErrorHandler
      */
     protected function convertExceptionToArray($exception)
     {
-        if (!YII_DEBUG && !$exception instanceof Exception) {
-            $exception = new Exception('Internal error', JSON_RPC_ERROR_INTERNAL);
+        if (!YII_DEBUG && !$exception instanceof JsonRpcException) {
+            $exception = new JsonRpcException('Internal error.', JSON_RPC_ERROR_INTERNAL);
         }
 
         $errorArray = [
             'code' => $exception->getCode(),
             'message' => $exception->getMessage(),
-            'data' => []
         ];
         if (YII_DEBUG) {
-            $errorArray['data']['type'] = get_class($exception);
+            $errorArray['data'] = [
+                'type' => get_class($exception)
+            ];
             if (!$exception instanceof UserException) {
-                $errorArray['data']['file'] = $exception->getFile();
-                $errorArray['data']['line'] = $exception->getLine();
-                $errorArray['data']['stack-trace'] = explode("\n", $exception->getTraceAsString());
+                $errorArray['data'] += [
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine(),
+                    'stack-trace' => explode("\n", $exception->getTraceAsString())
+                ];
+
                 if ($exception instanceof \yii\db\Exception) {
                     $errorArray['data']['error-info'] = $exception->errorInfo;
                 }
@@ -72,7 +76,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
         return [
             'jsonrpc' => '2.0',
             'error' => $errorArray,
-            'id' => ($exception instanceof Exception) ? $exception->id : null,
+            'id' => ($exception instanceof JsonRpcException) ? $exception->id : null,
         ];
     }
 
