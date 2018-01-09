@@ -56,11 +56,22 @@ Now this is how calls and responses will look like:
 -> {"jsonrpc": "2.0", "method": "api1.example.try", "id": 1}
 <- {"jsonrpc": "2.0", "result": "You've got it!", "id": 1}
 
--> {"jsonrpc": "2.0", "method": "api1.example.try-with-params", "params": {"foo": "bar"},	"id": 2}
+-> {"jsonrpc": "2.0", "method": "api1.example.try-with-params", "params": {"foo": "bar"}, "id": 2}
 <- {"jsonrpc": "2.0", "result": "Params received: $foo = bar.", "id": 2}
 
 -> {"jsonrpc": "2.0", "method": "api1.example.garbage", "id": 3}
 <- {"jsonrpc": "2.0", "error": {"code": -32601, "message": "Method not found."}, "id": 3}
+
+-> [
+	{"jsonrpc": "2.0", "method": "api1.example.try", "id": 1},
+   	{"jsonrpc": "2.0", "method": "api1.example.try-with-params", "params": {"foo": "bar"}, "id": 2},
+	{"jsonrpc": "2.0", "method": "api1.example.garbage", "id": 3}
+   ]
+<- [
+	{"jsonrpc": "2.0", "result": "You've got it!", "id": 1},
+   	{"jsonrpc": "2.0", "result": "Params received: $foo = bar.", "id": 2},
+	{"jsonrpc": "2.0", "error": {"code": -32601, "message": "Method not found."}, "id": 3}
+   ]
 ```
 
 
