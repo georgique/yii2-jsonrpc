@@ -178,24 +178,34 @@ class Action extends \yii\base\Action {
             'message' => $exception->getMessage(),
         ];
 
+        $data = false;
         if (YII_DEBUG) {
-            $result['data'] = [
+            $data = [
                 'type' => get_class($exception)
             ];
             if (!$exception instanceof UserException) {
-                $result['data'] += [
+                $data += [
                     'file' => $exception->getFile(),
                     'line' => $exception->getLine(),
                     'stack-trace' => explode("\n", $exception->getTraceAsString())
                 ];
 
                 if ($exception instanceof \yii\db\Exception) {
-                    $result['data']['error-info'] = $exception->errorInfo;
+                    $data['error-info'] = $exception->errorInfo;
                 }
             }
         }
         if (($prev = $exception->getPrevious()) !== null) {
-            $result['data']['previous'] = $this->renderException($prev);
+            $data['previous'] = $this->renderException($prev);
+        }
+
+        if ($data) {
+            if ($exception instanceof JsonRpcException) {
+                $result['data'] = $data;
+            }
+            else {
+                $result += $data;
+            }
         }
 
         return $result;
