@@ -175,10 +175,10 @@ class Action extends \yii\base\Action {
                 $response[] = $this->$renderMethod($executionResult, $request->id);
             }
             elseif ($request instanceof JsonRpcException) {
-                $this->renderError($request, $request->id);
+                $response[] = $this->renderError($request, $request->id);
             }
             else {
-                $this->renderError($request, null);
+                $response[] =  $this->renderError($request, null);
             }
         }
 
