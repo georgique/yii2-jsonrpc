@@ -46,7 +46,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
     protected function convertExceptionToArray($exception)
     {
         if (!YII_DEBUG && !$exception instanceof JsonRpcException) {
-            $exception = new JsonRpcException('Internal error.', JSON_RPC_ERROR_INTERNAL);
+            $exception = new JsonRpcException(null, 'Internal error.', JSON_RPC_ERROR_INTERNAL);
         }
 
         $errorArray = [

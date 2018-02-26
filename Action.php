@@ -27,13 +27,13 @@ class Action extends \yii\base\Action {
         try {
             $parameters = Json::decode($rawBody, false);
             if (!$parameters) {
-                throw new JsonRpcException('Could not parse JSON-RPC request body - empty result.', JSON_RPC_ERROR_REQUEST_INVALID);
+                throw new JsonRpcException(null, 'Could not parse JSON-RPC request body - empty result.', JSON_RPC_ERROR_REQUEST_INVALID);
             }
 
             return $parameters;
         }
         catch (JsonRpcException $e) {
-            throw new JsonRpcException('Could not parse JSON-RPC request.', JSON_RPC_ERROR_PARSE, $e);
+            throw new JsonRpcException(null, 'Could not parse JSON-RPC request.', JSON_RPC_ERROR_PARSE, $e);
         }
     }
 
@@ -65,23 +65,24 @@ class Action extends \yii\base\Action {
      * @throws \yii\base\InvalidConfigException
      */
     public function parseRequest($request) {
+        if (!isset($request->id)) {
+            throw new JsonRpcException(null, "The JSON sent is not a correct JSON-RPC request - incorrect id.", JSON_RPC_ERROR_REQUEST_INVALID);
+        }
+        elseif (!is_int($request->id) && !ctype_digit($request->id)) {
+            throw new JsonRpcException(null, "The JSON sent is not a correct JSON-RPC request - incorrect id.", JSON_RPC_ERROR_REQUEST_INVALID);
+        }
+
         if (!isset($request->jsonrpc) || $request->jsonrpc !== '2.0') {
-            throw new JsonRpcException("The JSON sent is not a correct JSON-RPC request - missing or incorrect version.", JSON_RPC_ERROR_REQUEST_INVALID);
+            throw new JsonRpcException($request->id, "The JSON sent is not a correct JSON-RPC request - missing or incorrect version.", JSON_RPC_ERROR_REQUEST_INVALID);
         }
 
         if (!isset($request->method) || !is_string($request->method) || (!$route = $this->parseMethod($request->method))) {
-            throw new JsonRpcException("The JSON sent is not a correct JSON-RPC request - missing or incorrect method.", JSON_RPC_ERROR_REQUEST_INVALID);
+            throw new JsonRpcException($request->id, "The JSON sent is not a correct JSON-RPC request - missing or incorrect method.", JSON_RPC_ERROR_REQUEST_INVALID);
         }
 
         $params = null;
         if (isset($request->params)) {
             $params = (array) $request->params;
-        }
-
-        if (!isset($request->id)) {
-            if (!is_int($request->id) && !ctype_digit($request->id)) {
-                throw new JsonRpcException("The JSON sent is not a correct JSON-RPC request - incorrect id.", JSON_RPC_ERROR_REQUEST_INVALID);
-            }
         }
 
         return \Yii::createObject([
@@ -110,16 +111,14 @@ class Action extends \yii\base\Action {
                     $result = $this->parseRequest($request);
                 }
                 catch (\Exception $exception) {
-                    $result = ($exception instanceof JsonRpcException)
-                        ? $exception
-                        : new JsonRpcException("Error happened during request parsing.", JSON_RPC_ERROR_INTERNAL, $exception);
+                    $result = $exception;
                 }
                 $results[] = $result;
             }
             return $results;
         }
 
-        throw new JsonRpcException("The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_REQUEST_INVALID);
+        throw new JsonRpcException(null, "The JSON sent is not a correct JSON-RPC request.", JSON_RPC_ERROR_REQUEST_INVALID);
     }
 
     /**
@@ -137,14 +136,14 @@ class Action extends \yii\base\Action {
         }
         catch (\Exception $exception) {
             if ($exception instanceof InvalidRouteException) {
-                $result = new JsonRpcException('Method not found.', JSON_RPC_ERROR_METHOD_NOT_FOUND, $exception);
+                $result = new JsonRpcException($request->id, 'Method not found: ' . $route . '.', JSON_RPC_ERROR_METHOD_NOT_FOUND);
                 return $result;
             }
             else if ($exception instanceof JsonRpcException) {
                 return $exception;
             }
             else {
-                $result = new JsonRpcException('Internal error.', JSON_RPC_ERROR_INTERNAL, $exception);
+                $result = new JsonRpcException($request->id, 'Internal error.', JSON_RPC_ERROR_INTERNAL);
                 return $result;
             }
         }
@@ -154,14 +153,33 @@ class Action extends \yii\base\Action {
     public function runWithParams($params)
     {
         // Parse errors will be caught and formatted by ErrorHandler
-        $requests = $this->parseJsonRpcBody(file_get_contents('php://input'));
-        $requestObjects = $this->parseRequests($requests);
+        try {
+            $requests = $this->parseJsonRpcBody(file_get_contents('php://input'));
+        }
+        catch (\Exception $e) {
+            $this->renderError($e, null);
+        }
+
+        try {
+            $requestObjects = $this->parseRequests($requests);
+        }
+        catch (\Exception $e) {
+            $this->renderError($e, null);
+        }
 
         $response = [];
         foreach ($requestObjects as $request) {
-            $executionResult = $this->executeRequest($request);
-            $renderMethod = ($executionResult instanceof \Exception) ? 'renderError' : 'renderSuccess';
-            $response[] = $this->$renderMethod($executionResult, $request->id);
+            if ($request instanceof JsonRpcRequest) {
+                $executionResult = $this->executeRequest($request);
+                $renderMethod = ($executionResult instanceof \Exception) ? 'renderError' : 'renderSuccess';
+                $response[] = $this->$renderMethod($executionResult, $request->id);
+            }
+            elseif ($request instanceof JsonRpcException) {
+                $this->renderError($request, $request->id);
+            }
+            else {
+                $this->renderError($request, null);
+            }
         }
 
         return (sizeof($response) == 1) ? array_shift($response) : $response;
@@ -173,16 +191,19 @@ class Action extends \yii\base\Action {
      * @return array
      */
     protected function renderException($exception) {
+
         $result = [
-            'code' => $exception->getCode(),
             'message' => $exception->getMessage(),
+            'code' => ($exception instanceof JsonRpcException) ? $exception->getCode() : JSON_RPC_ERROR_INTERNAL
         ];
 
-        $data = false;
+        $data = [];
+        if (!($exception instanceof JsonRpcException)) {
+            $data['code'] = $exception->getCode();
+            $data['type'] = get_class($exception);
+        }
+
         if (YII_DEBUG) {
-            $data = [
-                'type' => get_class($exception)
-            ];
             if (!$exception instanceof UserException) {
                 $data += [
                     'file' => $exception->getFile(),
@@ -194,18 +215,13 @@ class Action extends \yii\base\Action {
                     $data['error-info'] = $exception->errorInfo;
                 }
             }
-        }
-        if (($prev = $exception->getPrevious()) !== null) {
-            $data['previous'] = $this->renderException($prev);
+            if (($prev = $exception->getPrevious()) !== null) {
+                $data['previous'] = $this->renderException($prev);
+            }
         }
 
-        if ($data) {
-            if ($exception instanceof JsonRpcException) {
-                $result['data'] = $data;
-            }
-            else {
-                $result += $data;
-            }
+        if (!empty($data)) {
+            $result['data'] = $data;
         }
 
         return $result;
