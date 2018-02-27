@@ -10,7 +10,7 @@ namespace georgique\yii2\jsonrpc;
  */
 class JsonRpcException extends \yii\base\Exception {
 
-    public function __construct($id, $message = "", $code = 0, \Throwable $previous = null)
+    public function __construct($id, $message = "", $code = 0, $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->id = $id;

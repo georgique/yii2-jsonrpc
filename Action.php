@@ -136,16 +136,17 @@ class Action extends \yii\base\Action {
         }
         catch (\Exception $exception) {
             if ($exception instanceof InvalidRouteException) {
-                $result = new JsonRpcException($request->id, 'Method not found: ' . $route . '.', JSON_RPC_ERROR_METHOD_NOT_FOUND);
-                return $result;
+                $result = new JsonRpcException($request->id, 'Method not found: ' . $route . '.',
+                    JSON_RPC_ERROR_METHOD_NOT_FOUND, $exception);
             }
             else if ($exception instanceof JsonRpcException) {
-                return $exception;
+                $result = $exception;
             }
             else {
-                $result = new JsonRpcException($request->id, 'Internal error.', JSON_RPC_ERROR_INTERNAL);
-                return $result;
+                $result = new JsonRpcException($request->id, 'Internal error.', JSON_RPC_ERROR_INTERNAL, $exception);
             }
+
+            return $result;
         }
     }
 
