@@ -12,13 +12,25 @@ const JSON_RPC_ERROR_METHOD_NOT_FOUND = -32601;
 const JSON_RPC_ERROR_METHOD_PARAMS_INVALID = -32602;
 const JSON_RPC_ERROR_INTERNAL = -32603;
 
+// Pass params as function arguments
+const JSON_RPC_PARAMS_PASS_FUNCARGS = 1;
+
+// Pass params as request body
+const JSON_RPC_PARAMS_PASS_BODY = 2;
+
 class Controller extends \yii\web\Controller {
+
+    /**
+     * @var int $paramsPassMethod Defines method to pass params to the target action.
+     */
+    public $paramsPassMethod = JSON_RPC_PARAMS_PASS_FUNCARGS;
 
     public function actions()
     {
         return [
             'index' => [
                 'class' => Action::class,
+                'paramsPassMethod' => $this->paramsPassMethod
             ]
         ];
     }

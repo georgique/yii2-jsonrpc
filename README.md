@@ -14,12 +14,29 @@ Entry point:
 <?php
 
 namespace app\controllers;
+use \georgique\yii2\json-rpc\Controller;
 
-class JsonRpcController extends \georgique\yii2\json-rpc\Controller {
+class JsonRpcController extends Controller {
 
 	// Practically you don't need anything else in this controller, 
 	// unless you want to customize entry point somehow.
 	
+}
+```
+
+Entry point with different way to pass params:
+```php
+<?php
+
+namespace app\controllers;
+use \georgique\yii2\json-rpc\Controller;
+
+class JsonRpcBodyController extends Controller {
+
+	// With the customization JSON RPC params will be passed to the target action
+	// as request body params, not as action function arguments
+    public $paramsPassMethod = JSON_RPC_PARAMS_PASS_BODY;
+
 }
 ```
 
@@ -47,6 +64,16 @@ class ExampleController extends \yii\web\Controller {
     public function actionTryWithParams($foo) {
         return "Params received: \$foo = $foo.";
     }
+    
+    // Passing params as Yii request body params must be handy too, when we need to do a bulk
+    // attribute assignment for example.
+    public function actionTryWithBodyParams() {
+        $output = "Params received: \n";
+        foreach (\Yii::$app->request->getBodyParams() as $name => $value) {
+            $output .= "$name = $value\n";
+        }
+        return $output;
+    }
 
 }
 ```
@@ -58,6 +85,12 @@ Now this is how calls and responses will look like:
 
 -> {"jsonrpc": "2.0", "method": "api1.example.try-with-params", "params": {"foo": "bar"}, "id": 2}
 <- {"jsonrpc": "2.0", "result": "Params received: $foo = bar.", "id": 2}
+
+// Using alternative entry point:
+-> {"jsonrpc": "2.0", "method": "api1.example.try-with-body-params", "params": {"foo": "bar"}, "id": 2}
+<- {"jsonrpc": "2.0", "result": "Params received: 
+    $foo = bar.
+    ", "id": 2}
 
 -> {"jsonrpc": "2.0", "method": "api1.example.garbage", "id": 3}
 <- {"jsonrpc": "2.0", "error": {"code": -32601, "message": "Method not found."}, "id": 3}
@@ -73,6 +106,5 @@ Now this is how calls and responses will look like:
 	{"jsonrpc": "2.0", "error": {"code": -32601, "message": "Method not found."}, "id": 3}
    ]
 ```
-
 
 Author: George Shestayev george.shestayev@gmail.com
