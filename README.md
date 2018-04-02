@@ -14,7 +14,7 @@ Entry point:
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\json-rpc\Controller;
+use \georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcController extends Controller {
 
@@ -29,7 +29,7 @@ Entry point with different way to pass params:
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\json-rpc\Controller;
+use \georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcBodyController extends Controller {
 
