@@ -94,10 +94,11 @@ class Action extends \yii\base\Action {
         }
 
         return \Yii::createObject([
-            'class' => JsonRpcRequest::className(),
+            'class' => JsonRpcRequest::class,
             'id' => $request->id,
             'route' => $route,
-            'params' => $params
+            'params' => $params,
+            'originalRequest' => \Yii::$app->request,
         ]);
     }
 
@@ -215,14 +216,14 @@ class Action extends \yii\base\Action {
             $requests = $this->parseJsonRpcBody(file_get_contents('php://input'));
         }
         catch (\Exception $e) {
-            $this->renderError($e, null);
+            return $this->renderError($e, null);
         }
 
         try {
             $requestObjects = $this->parseRequests($requests);
         }
         catch (\Exception $e) {
-            $this->renderError($e, null);
+            return $this->renderError($e, null);
         }
 
         $response = [];

@@ -65,16 +65,17 @@ class ExampleController extends \yii\web\Controller {
         return "Params received: \$foo = $foo.";
     }
     
-    // Passing params as Yii request body params must be handy too, when we need to do a bulk
+    // Passing params as Yii request body params must be handy too, when we need to do a massive
     // attribute assignment for example.
     public function actionTryWithBodyParams() {
-        $output = "Params received: \n";
+        $output = "Params received: ";
+        $output_chunks = array();
         foreach (\Yii::$app->request->getBodyParams() as $name => $value) {
-            $output .= "$name = $value\n";
+            $output_chunks[] = "$name = $value\n";
         }
-        return $output;
+        return $output . implode(', ', $output_chunks) . '.';
     }
-
+ 
 }
 ```
 
@@ -87,10 +88,8 @@ Now this is how calls and responses will look like:
 <- {"jsonrpc": "2.0", "result": "Params received: $foo = bar.", "id": 2}
 
 // Using alternative entry point:
--> {"jsonrpc": "2.0", "method": "api1.example.try-with-body-params", "params": {"foo": "bar"}, "id": 2}
-<- {"jsonrpc": "2.0", "result": "Params received: 
-    $foo = bar.
-    ", "id": 2}
+-> {"jsonrpc": "2.0", "method": "api1.example.try-with-body-params", "params": {"foo": "bar", "foo1": "bar1"}, "id": 2}
+<- {"jsonrpc": "2.0", "result": "Params received: $foo = bar, $foo1 = bar1.", "id": 2}
 
 -> {"jsonrpc": "2.0", "method": "api1.example.garbage", "id": 3}
 <- {"jsonrpc": "2.0", "error": {"code": -32601, "message": "Method not found."}, "id": 3}
