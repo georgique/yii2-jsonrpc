@@ -22,7 +22,15 @@ class Action extends \yii\base\Action {
     /** @var Request $originalYiiRequest */
     private $originalYiiRequest;
 
+    /**
+     * @var int $paramsPassMethod Defines method to pass params to the target action.
+     */
     public $paramsPassMethod;
+
+    /**
+     * @var array Whether JSON parse should parse objects in `params` as associate arrays or objects
+     */
+    public $requestParseAsArray;
 
     /**
      * Parses json body.
@@ -66,6 +74,25 @@ class Action extends \yii\base\Action {
     }
 
     /**
+     * Recursively converts object to an associative array.
+     * @param $obj
+     * @return array
+     */
+    protected function objToAssoc($obj) {
+        $result = (array) $obj;
+
+        if (is_array($result)) {
+            foreach ($result as $key => $value) {
+                if (is_object($value) || is_array($value)) {
+                    $result[$key] = $this->objToAssoc($value);
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Parses request (parsed JSON object) and prepares JsonRpcRequest object.
      * @param $request
      * @return JsonRpcRequest
@@ -88,10 +115,9 @@ class Action extends \yii\base\Action {
             throw new JsonRpcException($request->id, "The JSON sent is not a correct JSON-RPC request - missing or incorrect method.", JSON_RPC_ERROR_REQUEST_INVALID);
         }
 
-        $params = [];
-        if (isset($request->params)) {
-            $params = (array) $request->params;
-        }
+        $params = ($this->requestParseAsArray)
+            ? (isset($request->params) ? $this->objToAssoc($request->params) : [])
+            : (isset($request->params) ? $request->params : new \stdClass());
 
         return \Yii::createObject([
             'class' => JsonRpcRequest::class,
