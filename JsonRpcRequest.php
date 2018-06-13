@@ -15,5 +15,5 @@ class JsonRpcRequest extends BaseObject {
     public $id;
     public $route;
     public $params = [];
-
+    public $originalRequest;
 }
