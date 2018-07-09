@@ -35,7 +35,7 @@ class JsonRpcBodyController extends Controller {
 
 	// With the customization JSON RPC params will be passed to the target action
 	// as request body params, not as action function arguments
-    public $paramsPassMethod = JSON_RPC_PARAMS_PASS_BODY;
+    public $paramsPassMethod = self::JSON_RPC_PARAMS_PASS_BODY;
 
 }
 ```
