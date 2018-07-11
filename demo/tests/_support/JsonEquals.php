@@ -18,7 +18,7 @@ class JsonEquals extends JsonContains
      *
      * @return bool
      */
-    protected function matches($other)
+    protected function matches($other) : bool
     {
         $jsonResponseArray = new JsonArray($other);
         if (!is_array($jsonResponseArray->toArray())) {

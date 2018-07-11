@@ -2,6 +2,8 @@
 
 Yii2 extension for JSON-RPC server implementation. Works not as Remote Procedure Call, but Remote Action Call, therefor leaves all Yii2 power for your service.
 
+[![Build Status](https://travis-ci.org/xzag/yii2-jsonrpc.svg?branch=feature-refactor)](https://travis-ci.org/xzag/yii2-jsonrpc)
+
 ## Features
 * Uses full Yii2 power, because method string is translated into a route. 
 * Lightweight.
