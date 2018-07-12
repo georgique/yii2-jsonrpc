@@ -113,11 +113,11 @@ class Action extends \yii\base\Action
                         throw new InvalidRequestException();
                     }
                 } catch (InvalidRequestException $e) {
-                    $batchResponse[] = new ErrorResponse($e, $request ?? null);
+                    $batchResponse[] = new ErrorResponse($e, $request ?: null);
                 } catch (JsonRpcException $e) {
                     // we do not return response to notifications!
                     if ($request && !is_null($request->id)) {
-                        $batchResponse[] = new ErrorResponse($e, $request ?? null);
+                        $batchResponse[] = new ErrorResponse($e, $request ?: null);
                     }
                 }
 
@@ -125,8 +125,6 @@ class Action extends \yii\base\Action
             }
         } catch (JsonRpcException $e) {
             return new ErrorResponse($e);
-        } catch (\Throwable $e) {
-            return new ErrorResponse(new InternalErrorException('Error while processing request', $e));
         }
 
         return !$isBatch ? array_shift($batchResponse) : $batchResponse;

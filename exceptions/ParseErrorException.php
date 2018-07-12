@@ -10,7 +10,7 @@ class ParseErrorException extends JsonRpcException
 {
     const CODE = -32700;
 
-    public function __construct(string $message = "", \Throwable $previous = null)
+    public function __construct($message = "", \Exception $previous = null)
     {
         parent::__construct($message, static::CODE, $previous);
     }

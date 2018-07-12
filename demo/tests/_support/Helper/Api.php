@@ -5,7 +5,6 @@ namespace tests\Helper;
 // all public methods declared in helper class will be available in $I
 
 use Codeception\Exception\ModuleException;
-use tests\JsonEquals;
 
 class Api extends \Codeception\Module
 {
@@ -22,7 +21,9 @@ class Api extends \Codeception\Module
 
         \PHPUnit\Framework\Assert::assertThat(
             $response,
-            new JsonEquals($json)
+            version_compare(PHP_VERSION, '7.1', '>=')
+                ? new JsonEqualsTypeHint($json)
+                : new JsonEquals($json)
         );
     }
 }

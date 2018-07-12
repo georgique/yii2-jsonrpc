@@ -1,6 +1,5 @@
 <?php
-
-namespace tests;
+namespace tests\Helper;
 
 use Codeception\PHPUnit\Constraint\JsonContains;
 use SebastianBergmann\Comparator\ComparisonFailure;
@@ -8,17 +7,9 @@ use SebastianBergmann\Comparator\ArrayComparator;
 use SebastianBergmann\Comparator\Factory;
 use Codeception\Util\JsonArray;
 
-class JsonEquals extends JsonContains
+class JsonEqualsWrapper extends JsonContains
 {
-    /**
-     * Evaluates the constraint for parameter $other. Returns true if the
-     * constraint is met, false otherwise.
-     *
-     * @param mixed $other Value or object to evaluate.
-     *
-     * @return bool
-     */
-    protected function matches($other) : bool
+    protected function _matches($other)
     {
         $jsonResponseArray = new JsonArray($other);
         if (!is_array($jsonResponseArray->toArray())) {

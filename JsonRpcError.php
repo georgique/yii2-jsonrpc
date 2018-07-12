@@ -20,9 +20,9 @@ class JsonRpcError implements \JsonSerializable
 
     /**
      * JsonRpcError constructor.
-     * @param \Throwable $exception
+     * @param \Exception $exception
      */
-    public function __construct(\Throwable $exception)
+    public function __construct(\Exception $exception)
     {
         $this->code = $exception->getCode();
         $this->message = $this->getExceptionMessage($exception);
@@ -46,10 +46,10 @@ class JsonRpcError implements \JsonSerializable
     }
 
     /**
-     * @param \Throwable $exception
+     * @param \Exception $exception
      * @return string
      */
-    protected function getExceptionMessage(\Throwable $exception)
+    protected function getExceptionMessage(\Exception $exception)
     {
         $message = $exception->getMessage();
         return !empty($message) ?
@@ -58,10 +58,10 @@ class JsonRpcError implements \JsonSerializable
     }
 
     /**
-     * @param \Throwable $exception
+     * @param \Exception $exception
      * @return array
      */
-    protected function convertExceptionToArray(\Throwable $exception)
+    protected function convertExceptionToArray(\Exception $exception)
     {
         $errorArray = [];
 
