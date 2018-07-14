@@ -28,7 +28,15 @@ class Action extends \yii\base\Action
     /** @var Request $originalYiiRequest */
     private $originalYiiRequest;
 
+    /**
+     * @var int $paramsPassMethod Defines method to pass params to the target action.
+     */
     public $paramsPassMethod;
+
+    /**
+     * @var array Whether JSON parse should parse objects in `params` as associate arrays or objects
+     */
+    public $requestParseAsArray;
 
     /**
      * Parses json body.
