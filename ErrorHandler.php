@@ -2,6 +2,8 @@
 
 namespace georgique\yii2\jsonrpc;
 
+use georgique\yii2\jsonrpc\exceptions\InternalErrorException;
+use georgique\yii2\jsonrpc\responses\ErrorResponse;
 use Yii;
 use yii\base\UserException;
 use yii\web\Response;
@@ -34,50 +36,8 @@ class ErrorHandler extends \yii\base\ErrorHandler
         }
 
         $response->setStatusCode(200);
-        $response->data = $this->convertExceptionToArray($exception);
+        $response->data = new ErrorResponse(new InternalErrorException('Error while processing request', $exception));
         $response->send();
-    }
-
-    /**
-     * Converts an exception into an array.
-     * @param \Exception|\Error $exception the exception being converted
-     * @return array the array representation of the exception.
-     */
-    protected function convertExceptionToArray($exception)
-    {
-        if (!YII_DEBUG && !$exception instanceof JsonRpcException) {
-            $exception = new JsonRpcException(null, 'Internal error.', JSON_RPC_ERROR_INTERNAL);
-        }
-
-        $errorArray = [
-            'code' => $exception->getCode(),
-            'message' => $exception->getMessage(),
-        ];
-        if (YII_DEBUG) {
-            $errorArray['data'] = [
-                'type' => get_class($exception)
-            ];
-            if (!$exception instanceof UserException) {
-                $errorArray['data'] += [
-                    'file' => $exception->getFile(),
-                    'line' => $exception->getLine(),
-                    'stack-trace' => explode("\n", $exception->getTraceAsString())
-                ];
-
-                if ($exception instanceof \yii\db\Exception) {
-                    $errorArray['data']['error-info'] = $exception->errorInfo;
-                }
-            }
-        }
-        if (($prev = $exception->getPrevious()) !== null) {
-            $errorArray['data']['previous'] = $this->convertExceptionToArray($prev);
-        }
-
-        return [
-            'jsonrpc' => '2.0',
-            'error' => $errorArray,
-            'id' => ($exception instanceof JsonRpcException) ? $exception->id : null,
-        ];
     }
 
 }

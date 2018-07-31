@@ -1,0 +1,7 @@
+# global codeception file to run tests from all apps
+include:
+    - demo
+paths:
+    log: demo/runtime/logs
+settings:
+    colors: false
