@@ -1,15 +1,16 @@
 {
 	"info": {
-		"_postman_id": "6f6ff4d4-89ee-4092-9b4e-7877cd768f7d",
+		"_postman_id": "9493d8bf-875d-4b38-94a2-0b905977b81c",
 		"name": "demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
+			"_postman_id": "770aae96-97d3-44be-a96c-cc8e469314e5",
 			"name": "single",
-			"description": "",
 			"item": [
 				{
+					"_postman_id": "9a0d7d6c-6828-49d5-a2c0-c907ae14df50",
 					"name": "someMethod",
 					"request": {
 						"method": "POST",
@@ -33,84 +34,10 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"id": "ec1be0dd-8677-41eb-bfc8-4e190748a890",
-							"name": "someMethod",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.some-method\", \"id\": 1}"
-								},
-								"url": {
-									"raw": "{{domain}}/json-rpc",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"json-rpc"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "49",
-									"name": "Content-Length",
-									"description": "The length of the response body in octets (8-bit bytes)"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=UTF-8",
-									"name": "Content-Type",
-									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 18:00:07 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-								}
-							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
-							"body": "{\"result\":\"Some response\",\"jsonrpc\":\"2.0\",\"id\":1}"
-						}
-					]
+					"response": []
 				},
 				{
+					"_postman_id": "e20361d6-2d12-4fb5-baba-a3aa5968f1d6",
 					"name": "methodWithParams",
 					"request": {
 						"method": "POST",
@@ -136,20 +63,19 @@
 					},
 					"response": [
 						{
-							"id": "ad2ae552-a285-4d68-9bee-a7c7be77e631",
+							"id": "aeb16c0f-a420-45ef-b6ab-ff7093b7c21a",
 							"name": "methodWithParams",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.method-with-params\", \"params\": {\"foo\": \"123\", \"bar\": \"baz\"}, \"id\": 1}"
+									"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.method-with-params\", \"params\": {\"bar\": \"123\", \"foo\": \"baz\"}, \"id\": 1}"
 								},
 								"url": {
 									"raw": "{{domain}}/json-rpc",
@@ -176,42 +102,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 18:00:28 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"result\":[\"123\",\"baz\"],\"jsonrpc\":\"2.0\",\"id\":1}"
 						}
 					]
 				},
 				{
+					"_postman_id": "c7b8c811-7cc9-4e82-9695-9beb364de2e7",
 					"name": "notification",
 					"request": {
 						"method": "POST",
@@ -237,15 +136,14 @@
 					},
 					"response": [
 						{
-							"id": "7c60c504-8878-46fd-becc-7152b075d3bb",
+							"id": "1aedba47-dd70-4c01-8d54-babefe3b69a6",
 							"name": "notification empty response",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -277,37 +175,9 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 18:00:38 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": ""
 						}
 					]
@@ -315,10 +185,11 @@
 			]
 		},
 		{
+			"_postman_id": "6581dde2-a617-4dd2-b4be-e17d66d52aee",
 			"name": "batch",
-			"description": "",
 			"item": [
 				{
+					"_postman_id": "1f0d1b9a-6b10-4a05-936a-42ed7b23b09d",
 					"name": "successful",
 					"request": {
 						"method": "POST",
@@ -344,16 +215,14 @@
 					},
 					"response": [
 						{
-							"id": "9236a465-215b-429d-9dfb-eb3556aaf5ce",
+							"id": "edbe85ed-4e8d-4dd2-b015-21ddf455cdaa",
 							"name": "successful",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -385,42 +254,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:58:30 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"result\":\"Some response\",\"jsonrpc\":\"2.0\",\"id\":1},{\"result\":[\"fubar\",\"baz\"],\"jsonrpc\":\"2.0\",\"id\":4}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "50f94771-b1d3-4046-a822-fa263465516b",
 					"name": "different params object",
 					"request": {
 						"method": "POST",
@@ -446,15 +288,14 @@
 					},
 					"response": [
 						{
-							"id": "2d4a8dee-efed-4327-b4ee-cbb3290a2f81",
+							"id": "f7360ca5-a4a1-4544-bc43-6d05fca5cf2a",
 							"name": "different params object",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -486,42 +327,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 19:59:04 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"result\":15,\"jsonrpc\":\"2.0\",\"id\":1},{\"result\":8,\"jsonrpc\":\"2.0\",\"id\":2},{\"result\":[\"b\",\"c\"],\"jsonrpc\":\"2.0\",\"id\":2}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "ecdc90e6-00c8-4c5c-8bbc-ac02a651d913",
 					"name": "success + error",
 					"request": {
 						"method": "POST",
@@ -547,15 +361,14 @@
 					},
 					"response": [
 						{
-							"id": "88046c37-3f34-43a2-83d7-e1b8b16334ad",
+							"id": "fafb7bf4-c605-4b54-b22d-c21be5f14b85",
 							"name": "success + error",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -587,42 +400,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:58:17 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"result\":\"Some response\",\"jsonrpc\":\"2.0\",\"id\":1},{\"error\":{\"code\":-32602,\"message\":\"Invalid params\"},\"jsonrpc\":\"2.0\",\"id\":4}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "a1416905-8432-49cf-976d-58657501c720",
 					"name": "success + error + silent notification error",
 					"request": {
 						"method": "POST",
@@ -648,15 +434,14 @@
 					},
 					"response": [
 						{
-							"id": "d21d5cfb-0e6b-45bb-8c9e-47e865750c31",
+							"id": "adbf0028-1089-44b1-9d82-ec982bbf01b6",
 							"name": "success + error + silent notification error",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -688,42 +473,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 18:08:42 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"result\":\"Some response\",\"jsonrpc\":\"2.0\",\"id\":1},{\"error\":{\"code\":-32602,\"message\":\"Invalid params\"},\"jsonrpc\":\"2.0\",\"id\":4}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "3fe8414d-f911-4ca8-9011-3b4920261bde",
 					"name": "2 errors",
 					"request": {
 						"method": "POST",
@@ -749,15 +507,14 @@
 					},
 					"response": [
 						{
-							"id": "ea9486b0-be29-4001-ac43-30ee3d1b59cc",
+							"id": "066186b3-3226-4d93-999b-80ee6236c72a",
 							"name": "2 errors",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -789,42 +546,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:56:43 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":1},{\"error\":{\"code\":-32601,\"message\":\"Method not found: missing.\"},\"jsonrpc\":\"2.0\",\"id\":4}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "8fcf7aae-2e22-42bf-bf50-bdb764aa4960",
 					"name": "Parse error with batch",
 					"request": {
 						"method": "POST",
@@ -850,15 +580,14 @@
 					},
 					"response": [
 						{
-							"id": "c184f494-cbd9-4319-8f52-ae6fd16f0988",
+							"id": "6c48e5c8-bcf3-441d-b3c7-0701b35df8c1",
 							"name": "Parse error with batch",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -890,42 +619,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:56:33 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32700,\"message\":\"Parse error\"},\"jsonrpc\":\"2.0\",\"id\":null}"
 						}
 					]
 				},
 				{
+					"_postman_id": "16278c8e-7e23-4688-bd43-f3312f40544e",
 					"name": "success + notification",
 					"request": {
 						"method": "POST",
@@ -952,15 +654,14 @@
 					},
 					"response": [
 						{
-							"id": "e2bc3692-3228-4159-be24-42332e738cd0",
+							"id": "4f21ba23-d4e0-411f-9de0-b0e5e883980c",
 							"name": "success + notification",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -993,42 +694,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:56:09 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"result\":\"Some response\",\"jsonrpc\":\"2.0\",\"id\":1}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "4ea8c5ba-7f2e-40c3-b988-254962d1ceea",
 					"name": "Invalid batch",
 					"request": {
 						"method": "POST",
@@ -1054,15 +728,14 @@
 					},
 					"response": [
 						{
-							"id": "76fb0caa-7ca3-4972-8e0e-ce5e96c5d338",
+							"id": "f4256eee-df21-44a7-a037-db37359bc86e",
 							"name": "Invalid batch",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1094,42 +767,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:55:53 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null},{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null},{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null}]"
 						}
 					]
 				},
 				{
+					"_postman_id": "45d94a25-c81b-48d7-8f00-6e8ab758f972",
 					"name": "Empty array",
 					"request": {
 						"method": "POST",
@@ -1155,15 +801,14 @@
 					},
 					"response": [
 						{
-							"id": "3b5c22c0-70f3-461c-9e84-fec063015cca",
+							"id": "cb1218e2-5a67-49a9-a3c6-ce133ec61b76",
 							"name": "Empty array",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1195,37 +840,9 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:53:42 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "[{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null},{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null},{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null}]"
 						}
 					]
@@ -1233,10 +850,11 @@
 			]
 		},
 		{
+			"_postman_id": "00b860cc-8e13-4643-8bf6-51e6ef507438",
 			"name": "errors",
-			"description": "",
 			"item": [
 				{
+					"_postman_id": "785a9264-b878-4669-ae25-43ba589db8aa",
 					"name": "Parse error",
 					"request": {
 						"method": "POST",
@@ -1262,15 +880,14 @@
 					},
 					"response": [
 						{
-							"id": "b8531068-f7ea-42dd-9d4f-8a9ad9cb322e",
+							"id": "c8eb6625-2fab-44a5-b056-ef7c01593656",
 							"name": "Parse error",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1302,42 +919,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:58:43 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32700,\"message\":\"Parse error\"},\"jsonrpc\":\"2.0\",\"id\":null}"
 						}
 					]
 				},
 				{
+					"_postman_id": "1cac4ac0-c327-4ce9-a11c-6bd466fa3398",
 					"name": "Internal error",
 					"request": {
 						"method": "POST",
@@ -1363,15 +953,14 @@
 					},
 					"response": [
 						{
-							"id": "cc250641-340d-478e-8ed4-e35b1351ba55",
+							"id": "b3cd2bcc-66df-4920-8e83-7d9ec067e917",
 							"name": "Internal error",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1403,42 +992,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:58:54 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32603,\"message\":\"Internal error\"},\"jsonrpc\":\"2.0\",\"id\":1}"
 						}
 					]
 				},
 				{
+					"_postman_id": "e3f64277-4285-403d-909c-4770c58eed21",
 					"name": "Invalid params",
 					"request": {
 						"method": "POST",
@@ -1464,15 +1026,14 @@
 					},
 					"response": [
 						{
-							"id": "15544030-cabe-4036-b024-c0c67647f014",
+							"id": "68f5c27e-ae4d-4cd5-be1f-0df3615a0663",
 							"name": "Invalid params",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1504,42 +1065,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:59:12 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32602,\"message\":\"Invalid params\"},\"jsonrpc\":\"2.0\",\"id\":1}"
 						}
 					]
 				},
 				{
+					"_postman_id": "ae3acc49-5261-470c-bea3-473acdb88be7",
 					"name": "Method not found",
 					"request": {
 						"method": "POST",
@@ -1565,15 +1099,14 @@
 					},
 					"response": [
 						{
-							"id": "b85509aa-b4d7-4f6e-903c-9d19621461f3",
+							"id": "92dac7a0-fdc6-4c2c-b1ed-adfce67f6472",
 							"name": "Method not found",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1605,42 +1138,15 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:59:26 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32601,\"message\":\"Method not found: missing-method.\"},\"jsonrpc\":\"2.0\",\"id\":1}"
 						}
 					]
 				},
 				{
+					"_postman_id": "af9d521c-15ee-4152-81e0-e3baca19ba34",
 					"name": "Invalid request",
 					"request": {
 						"method": "POST",
@@ -1666,15 +1172,14 @@
 					},
 					"response": [
 						{
-							"id": "c864fda7-083b-4f4b-9631-a9fb3891e6f3",
+							"id": "4e7eee62-bf94-4b62-9ccf-32d50c8e7dda",
 							"name": "Invalid request",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"disabled": false
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1706,38 +1211,89 @@
 									"value": "application/json; charset=UTF-8",
 									"name": "Content-Type",
 									"description": "The mime type of this content"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 10 Jul 2018 17:59:41 GMT",
-									"name": "Date",
-									"description": "The date and time that the message was sent"
-								},
-								{
-									"key": "Server",
-									"value": "Microsoft-IIS/10.0",
-									"name": "Server",
-									"description": "A name for the server"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.0.13",
-									"name": "X-Powered-By",
-									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 								}
 							],
-							"cookie": [
-								{
-									"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (Novosibirsk Standard Time)",
-									"httpOnly": true,
-									"domain": "json-rpc-demo.local",
-									"path": "/",
-									"secure": false,
-									"value": "QZyIL-SzHT9oKwO0wjyRTN_rcPOlSyP0",
-									"key": "_csrf"
-								}
-							],
+							"cookie": [],
 							"body": "{\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"jsonrpc\":\"2.0\",\"id\":null}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"_postman_id": "760191b9-e580-4a02-9603-e87744517a65",
+			"name": "body params",
+			"item": [
+				{
+					"_postman_id": "6af051f0-2e86-4ea0-8fef-db2a7c89af72",
+					"name": "sum int params",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.sum-integer-list\", \"params\": [1, 2, 3, 4, 4.5, \"foo\", \"bar\"], \"id\": 1}"
+						},
+						"url": {
+							"raw": "{{domain}}/body-params-json-rpc",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"body-params-json-rpc"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "563ddac8-347c-4987-baa2-592b73cd3f83",
+							"name": "sum int params",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.sum-integer-list\", \"params\": [1, 2, 3, 4, 4.5, \"foo\", \"bar\"], \"id\": 1}"
+								},
+								"url": {
+									"raw": "{{domain}}/body-params-json-rpc",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"body-params-json-rpc"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "36",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								}
+							],
+							"cookie": [],
+							"body": "{\"jsonrpc\":\"2.0\",\"result\":10,\"id\":1}"
 						}
 					]
 				}

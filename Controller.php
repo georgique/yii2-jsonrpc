@@ -23,18 +23,12 @@ class Controller extends \yii\web\Controller
      */
     public $paramsPassMethod = self::JSON_RPC_PARAMS_PASS_FUNCARGS;
 
-    /**
-     * @var array Whether JSON parse should parse objects in `params` as associate arrays or objects
-     */
-    public $requestParseAsArray = true;
-  
     public function actions()
     {
         return [
             'index' => [
                 'class' => Action::class,
                 'paramsPassMethod' => $this->paramsPassMethod,
-                'requestParseAsArray' => $this->requestParseAsArray,
             ]
         ];
     }

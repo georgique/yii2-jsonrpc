@@ -53,12 +53,30 @@ class DemoController extends Controller
         return $a + $b;
     }
 
-    public function actionSumList($params)
+    /**
+     * @return mixed
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionSumIntegerList()
     {
-        //var_dump($params);
+        $params = \Yii::$app->request->getBodyParams();
         return array_reduce($params, function ($acc, $item) {
-            $acc += $item;
+            $acc += is_int($item) ? $item : 0;
             return $acc;
         }, 0);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionDumpRequest()
+    {
+        $output = "Params received: ";
+        $output_chunks = array();
+        foreach (\Yii::$app->request->getBodyParams() as $name => $value) {
+            $output_chunks[] = "$name = $value\n";
+        }
+        return $output . implode(', ', $output_chunks) . '.';
     }
 }

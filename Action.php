@@ -34,11 +34,6 @@ class Action extends \yii\base\Action
     public $paramsPassMethod;
 
     /**
-     * @var array Whether JSON parse should parse objects in `params` as associate arrays or objects
-     */
-    public $requestParseAsArray;
-
-    /**
      * Parses json body.
      * @param $rawBody
      * @return mixed
@@ -84,25 +79,6 @@ class Action extends \yii\base\Action
     }
 
     /**
-     * Recursively converts object to an associative array.
-     * @param $obj
-     * @return array
-     */
-    protected function objToAssoc($obj) {
-        $result = (array) $obj;
-
-        if (is_array($result)) {
-            foreach ($result as $key => $value) {
-                if (is_object($value) || is_array($value)) {
-                    $result[$key] = $this->objToAssoc($value);
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * @inheritdoc
      */
     public function runWithParams($params)
@@ -126,32 +102,21 @@ class Action extends \yii\base\Action
                     $request = new JsonRpcRequest();
                     $request->paramsPassMethod = $this->paramsPassMethod;
 
-                    // Handling params
-                    $params = ($this->requestParseAsArray)
-                        ? (isset($request->params) ? $this->objToAssoc($request->params) : [])
-                        : (isset($request->params) ? $request->params : new \stdClass());
-
-                    $requestData = ArrayHelper::toArray($requestData);
-                    $requestData['params'] = $params;
-
-                    $request->load($requestData, '');
+                    $request->load(ArrayHelper::toArray($requestData), '');
                     if ($request->validate()) {
                         $result = $request->execute();
                         if (!is_null($request->id)) {
                             $batchResponse[] = new SuccessResponse($request, $result);
                         }
-                    }
-                    else {
+                    } else {
                         foreach ($request->getFirstErrors() as $attribute => $error) {
                             $request->$attribute = null;
                         }
                         throw new InvalidRequestException();
                     }
-                }
-                catch (InvalidRequestException $e) {
+                } catch (InvalidRequestException $e) {
                     $batchResponse[] = new ErrorResponse($e, $request ?: null);
-                }
-                catch (JsonRpcException $e) {
+                } catch (JsonRpcException $e) {
                     // We do not return response to notifications
                     if ($request && !is_null($request->id)) {
                         $batchResponse[] = new ErrorResponse($e, $request ?: null);
@@ -160,8 +125,7 @@ class Action extends \yii\base\Action
 
                 $this->restoreYiiRequest();
             }
-        }
-        catch (JsonRpcException $e) {
+        } catch (JsonRpcException $e) {
             return new ErrorResponse($e);
         }
 
