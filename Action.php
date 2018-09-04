@@ -34,6 +34,11 @@ class Action extends \yii\base\Action
     public $paramsPassMethod;
 
     /**
+     * @var array Whether JSON parse should parse objects in `params` as associate arrays or objects
+     */
+    public $requestParseAsArray;
+
+    /**
      * Parses json body.
      * @param $rawBody
      * @return mixed
@@ -101,6 +106,7 @@ class Action extends \yii\base\Action
                 try {
                     $request = new JsonRpcRequest();
                     $request->paramsPassMethod = $this->paramsPassMethod;
+                    $request->parseAsArray = $this->requestParseAsArray;
 
                     $request->load(ArrayHelper::toArray($requestData), '');
                     if ($request->validate()) {

@@ -1,16 +1,15 @@
 {
 	"info": {
-		"_postman_id": "9493d8bf-875d-4b38-94a2-0b905977b81c",
+		"_postman_id": "288fd077-e773-4e71-9e01-9f41be940d37",
 		"name": "demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"_postman_id": "770aae96-97d3-44be-a96c-cc8e469314e5",
 			"name": "single",
+			"description": null,
 			"item": [
 				{
-					"_postman_id": "9a0d7d6c-6828-49d5-a2c0-c907ae14df50",
 					"name": "someMethod",
 					"request": {
 						"method": "POST",
@@ -37,7 +36,6 @@
 					"response": []
 				},
 				{
-					"_postman_id": "e20361d6-2d12-4fb5-baba-a3aa5968f1d6",
 					"name": "methodWithParams",
 					"request": {
 						"method": "POST",
@@ -63,7 +61,7 @@
 					},
 					"response": [
 						{
-							"id": "aeb16c0f-a420-45ef-b6ab-ff7093b7c21a",
+							"id": "de6ab6e5-7dd0-41da-910f-abca27206adb",
 							"name": "methodWithParams",
 							"originalRequest": {
 								"method": "POST",
@@ -110,7 +108,78 @@
 					]
 				},
 				{
-					"_postman_id": "c7b8c811-7cc9-4e82-9695-9beb364de2e7",
+					"name": "echo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.method-with-params\", \"params\": {\"bar\": \"123\", \"foo\": \"baz\"}, \"id\": 1}"
+						},
+						"url": {
+							"raw": "{{domain}}/json-rpc",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"json-rpc"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e6175da4-c2d4-4fb5-bbd4-0a3fa71c40a3",
+							"name": "methodWithParams",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.method-with-params\", \"params\": {\"bar\": \"123\", \"foo\": \"baz\"}, \"id\": 1}"
+								},
+								"url": {
+									"raw": "{{domain}}/json-rpc",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"json-rpc"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "47",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								}
+							],
+							"cookie": [],
+							"body": "{\"result\":[\"123\",\"baz\"],\"jsonrpc\":\"2.0\",\"id\":1}"
+						}
+					]
+				},
+				{
 					"name": "notification",
 					"request": {
 						"method": "POST",
@@ -136,7 +205,7 @@
 					},
 					"response": [
 						{
-							"id": "1aedba47-dd70-4c01-8d54-babefe3b69a6",
+							"id": "21e1a90a-f333-4d66-aa40-7666ac1f0a60",
 							"name": "notification empty response",
 							"originalRequest": {
 								"method": "POST",
@@ -185,11 +254,10 @@
 			]
 		},
 		{
-			"_postman_id": "6581dde2-a617-4dd2-b4be-e17d66d52aee",
 			"name": "batch",
+			"description": null,
 			"item": [
 				{
-					"_postman_id": "1f0d1b9a-6b10-4a05-936a-42ed7b23b09d",
 					"name": "successful",
 					"request": {
 						"method": "POST",
@@ -215,7 +283,7 @@
 					},
 					"response": [
 						{
-							"id": "edbe85ed-4e8d-4dd2-b015-21ddf455cdaa",
+							"id": "af2060d9-ee08-4ed8-8eea-5dac3f120a13",
 							"name": "successful",
 							"originalRequest": {
 								"method": "POST",
@@ -262,7 +330,6 @@
 					]
 				},
 				{
-					"_postman_id": "50f94771-b1d3-4046-a822-fa263465516b",
 					"name": "different params object",
 					"request": {
 						"method": "POST",
@@ -288,7 +355,7 @@
 					},
 					"response": [
 						{
-							"id": "f7360ca5-a4a1-4544-bc43-6d05fca5cf2a",
+							"id": "9532a8a9-902c-4607-985a-bf39f73c8aff",
 							"name": "different params object",
 							"originalRequest": {
 								"method": "POST",
@@ -335,7 +402,6 @@
 					]
 				},
 				{
-					"_postman_id": "ecdc90e6-00c8-4c5c-8bbc-ac02a651d913",
 					"name": "success + error",
 					"request": {
 						"method": "POST",
@@ -361,7 +427,7 @@
 					},
 					"response": [
 						{
-							"id": "fafb7bf4-c605-4b54-b22d-c21be5f14b85",
+							"id": "36388f08-925b-414b-a553-304629712924",
 							"name": "success + error",
 							"originalRequest": {
 								"method": "POST",
@@ -408,7 +474,6 @@
 					]
 				},
 				{
-					"_postman_id": "a1416905-8432-49cf-976d-58657501c720",
 					"name": "success + error + silent notification error",
 					"request": {
 						"method": "POST",
@@ -434,7 +499,7 @@
 					},
 					"response": [
 						{
-							"id": "adbf0028-1089-44b1-9d82-ec982bbf01b6",
+							"id": "cfbae2b5-7e91-4f76-88d4-244cdbc46761",
 							"name": "success + error + silent notification error",
 							"originalRequest": {
 								"method": "POST",
@@ -481,7 +546,6 @@
 					]
 				},
 				{
-					"_postman_id": "3fe8414d-f911-4ca8-9011-3b4920261bde",
 					"name": "2 errors",
 					"request": {
 						"method": "POST",
@@ -507,7 +571,7 @@
 					},
 					"response": [
 						{
-							"id": "066186b3-3226-4d93-999b-80ee6236c72a",
+							"id": "1984f2d4-b117-4485-8d4f-ff2566ae12fd",
 							"name": "2 errors",
 							"originalRequest": {
 								"method": "POST",
@@ -554,7 +618,6 @@
 					]
 				},
 				{
-					"_postman_id": "8fcf7aae-2e22-42bf-bf50-bdb764aa4960",
 					"name": "Parse error with batch",
 					"request": {
 						"method": "POST",
@@ -580,7 +643,7 @@
 					},
 					"response": [
 						{
-							"id": "6c48e5c8-bcf3-441d-b3c7-0701b35df8c1",
+							"id": "fed56e7d-3455-4319-ad0f-94f9a970cb6f",
 							"name": "Parse error with batch",
 							"originalRequest": {
 								"method": "POST",
@@ -627,7 +690,6 @@
 					]
 				},
 				{
-					"_postman_id": "16278c8e-7e23-4688-bd43-f3312f40544e",
 					"name": "success + notification",
 					"request": {
 						"method": "POST",
@@ -654,7 +716,7 @@
 					},
 					"response": [
 						{
-							"id": "4f21ba23-d4e0-411f-9de0-b0e5e883980c",
+							"id": "55881372-8ff3-489a-9a1e-a843c8e361c7",
 							"name": "success + notification",
 							"originalRequest": {
 								"method": "POST",
@@ -702,7 +764,6 @@
 					]
 				},
 				{
-					"_postman_id": "4ea8c5ba-7f2e-40c3-b988-254962d1ceea",
 					"name": "Invalid batch",
 					"request": {
 						"method": "POST",
@@ -728,7 +789,7 @@
 					},
 					"response": [
 						{
-							"id": "f4256eee-df21-44a7-a037-db37359bc86e",
+							"id": "05ca3748-8fc0-441b-bd6f-83e3be974fde",
 							"name": "Invalid batch",
 							"originalRequest": {
 								"method": "POST",
@@ -775,7 +836,6 @@
 					]
 				},
 				{
-					"_postman_id": "45d94a25-c81b-48d7-8f00-6e8ab758f972",
 					"name": "Empty array",
 					"request": {
 						"method": "POST",
@@ -801,7 +861,7 @@
 					},
 					"response": [
 						{
-							"id": "cb1218e2-5a67-49a9-a3c6-ce133ec61b76",
+							"id": "dac580cc-9b05-4753-8e00-179ba1135fcf",
 							"name": "Empty array",
 							"originalRequest": {
 								"method": "POST",
@@ -850,11 +910,10 @@
 			]
 		},
 		{
-			"_postman_id": "00b860cc-8e13-4643-8bf6-51e6ef507438",
 			"name": "errors",
+			"description": null,
 			"item": [
 				{
-					"_postman_id": "785a9264-b878-4669-ae25-43ba589db8aa",
 					"name": "Parse error",
 					"request": {
 						"method": "POST",
@@ -880,7 +939,7 @@
 					},
 					"response": [
 						{
-							"id": "c8eb6625-2fab-44a5-b056-ef7c01593656",
+							"id": "a3d6621f-f6b2-499c-a248-102daecb7713",
 							"name": "Parse error",
 							"originalRequest": {
 								"method": "POST",
@@ -927,7 +986,6 @@
 					]
 				},
 				{
-					"_postman_id": "1cac4ac0-c327-4ce9-a11c-6bd466fa3398",
 					"name": "Internal error",
 					"request": {
 						"method": "POST",
@@ -953,7 +1011,7 @@
 					},
 					"response": [
 						{
-							"id": "b3cd2bcc-66df-4920-8e83-7d9ec067e917",
+							"id": "845b6c74-0a87-41d3-a886-571eee5c173b",
 							"name": "Internal error",
 							"originalRequest": {
 								"method": "POST",
@@ -1000,7 +1058,6 @@
 					]
 				},
 				{
-					"_postman_id": "e3f64277-4285-403d-909c-4770c58eed21",
 					"name": "Invalid params",
 					"request": {
 						"method": "POST",
@@ -1026,7 +1083,7 @@
 					},
 					"response": [
 						{
-							"id": "68f5c27e-ae4d-4cd5-be1f-0df3615a0663",
+							"id": "c5c78117-1127-4ec6-a6b8-43fd827a1e85",
 							"name": "Invalid params",
 							"originalRequest": {
 								"method": "POST",
@@ -1073,7 +1130,6 @@
 					]
 				},
 				{
-					"_postman_id": "ae3acc49-5261-470c-bea3-473acdb88be7",
 					"name": "Method not found",
 					"request": {
 						"method": "POST",
@@ -1099,7 +1155,7 @@
 					},
 					"response": [
 						{
-							"id": "92dac7a0-fdc6-4c2c-b1ed-adfce67f6472",
+							"id": "ff1fc920-ffd2-4fd9-a16a-f55c2046a58b",
 							"name": "Method not found",
 							"originalRequest": {
 								"method": "POST",
@@ -1146,7 +1202,6 @@
 					]
 				},
 				{
-					"_postman_id": "af9d521c-15ee-4152-81e0-e3baca19ba34",
 					"name": "Invalid request",
 					"request": {
 						"method": "POST",
@@ -1172,7 +1227,7 @@
 					},
 					"response": [
 						{
-							"id": "4e7eee62-bf94-4b62-9ccf-32d50c8e7dda",
+							"id": "fa899ff6-cf0e-4426-88d4-1d5f1e497029",
 							"name": "Invalid request",
 							"originalRequest": {
 								"method": "POST",
@@ -1221,11 +1276,10 @@
 			]
 		},
 		{
-			"_postman_id": "760191b9-e580-4a02-9603-e87744517a65",
 			"name": "body params",
+			"description": null,
 			"item": [
 				{
-					"_postman_id": "6af051f0-2e86-4ea0-8fef-db2a7c89af72",
 					"name": "sum int params",
 					"request": {
 						"method": "POST",
@@ -1251,7 +1305,7 @@
 					},
 					"response": [
 						{
-							"id": "563ddac8-347c-4987-baa2-592b73cd3f83",
+							"id": "5c0626ea-c7fc-44ea-af3e-995156960ca9",
 							"name": "sum int params",
 							"originalRequest": {
 								"method": "POST",
@@ -1296,6 +1350,90 @@
 							"body": "{\"jsonrpc\":\"2.0\",\"result\":10,\"id\":1}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "echo",
+			"description": "",
+			"item": [
+				{
+					"name": "asArray",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.echo\", \"params\": {\"params\": {\"a\": 1, \"b\": 3}}, \"id\": 1}"
+						},
+						"url": {
+							"raw": "{{domain}}/json-rpc",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"json-rpc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "asObject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jsonrpc\": \"2.0\", \"method\": \"demo.echo-object\", \"params\": {\"params\": {\"a\": 1, \"b\": 3}}, \"id\": 1}"
+						},
+						"url": {
+							"raw": "{{domain}}/object-params-json-rpc",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"object-params-json-rpc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "object property",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\"jsonrpc\": \"2.0\", \"method\": \"demo.object-foo\", \"params\": [{\"foo\": 12}], \"id\": 1},\n\t{\"jsonrpc\": \"2.0\", \"method\": \"demo.object-foo\", \"params\": {\"object\": {\"foo\": 24}}, \"id\": 2}\n]"
+						},
+						"url": {
+							"raw": "{{domain}}/object-params-json-rpc",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"object-params-json-rpc"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

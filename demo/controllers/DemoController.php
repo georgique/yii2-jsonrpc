@@ -17,6 +17,31 @@ class DemoController extends Controller
     }
 
     /**
+     * @param $params
+     * @return mixed
+     */
+    public function actionEcho(array $params)
+    {
+        return [
+            'params' => $params,
+            'type' => gettype($params)
+        ];
+    }
+
+    public function actionEchoObject($params)
+    {
+        return [
+            'params' => $params,
+            'type' => gettype($params)
+        ];
+    }
+
+    public function actionObjectFoo($object)
+    {
+        return $object->foo;
+    }
+
+    /**
      * @param $foo
      * @param $bar
      * @return array
