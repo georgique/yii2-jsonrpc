@@ -28,6 +28,7 @@ class JsonRpcRequest extends Model
     public $params = [];
 
     public $paramsPassMethod;
+    public $parseAsArray;
 
     /**
      * @inheritdoc
@@ -166,7 +167,7 @@ class JsonRpcRequest extends Model
             if ($this->paramsPassMethod == Controller::JSON_RPC_PARAMS_PASS_BODY) {
                 $app->request->setBodyParams($this->params);
                 $app->request->setRawBody(Json::encode($this->params));
-                $result = $app->runAction($routeParsed, $params);
+                $result = $app->runAction($routeParsed);
             } else {
                 if (ArrayHelper::isAssociative($this->params)) {
                     $params += $this->params;
@@ -174,6 +175,13 @@ class JsonRpcRequest extends Model
                     // allow non-named parameters
                     $params += $this->bindParamsArray($routeParsed, $this->params);
                 }
+
+                if (is_array($params) && !$this->parseAsArray) {
+                    foreach ($params as $key => $value) {
+                        $params[$key] = Json::decode(Json::encode($value), false);
+                    }
+                }
+
                 $result = $app->runAction($routeParsed, $params);
             }
         } catch (JsonRpcException $e) {

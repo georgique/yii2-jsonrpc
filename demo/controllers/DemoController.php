@@ -17,6 +17,31 @@ class DemoController extends Controller
     }
 
     /**
+     * @param $params
+     * @return mixed
+     */
+    public function actionEcho(array $params)
+    {
+        return [
+            'params' => $params,
+            'type' => gettype($params)
+        ];
+    }
+
+    public function actionEchoObject($params)
+    {
+        return [
+            'params' => $params,
+            'type' => gettype($params)
+        ];
+    }
+
+    public function actionObjectFoo($object)
+    {
+        return $object->foo;
+    }
+
+    /**
      * @param $foo
      * @param $bar
      * @return array
@@ -53,12 +78,30 @@ class DemoController extends Controller
         return $a + $b;
     }
 
-    public function actionSumList($params)
+    /**
+     * @return mixed
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionSumIntegerList()
     {
-        //var_dump($params);
+        $params = \Yii::$app->request->getBodyParams();
         return array_reduce($params, function ($acc, $item) {
-            $acc += $item;
+            $acc += is_int($item) ? $item : 0;
             return $acc;
         }, 0);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionDumpRequest()
+    {
+        $output = "Params received: ";
+        $output_chunks = array();
+        foreach (\Yii::$app->request->getBodyParams() as $name => $value) {
+            $output_chunks[] = "$name = $value\n";
+        }
+        return $output . implode(', ', $output_chunks) . '.';
     }
 }
