@@ -167,7 +167,7 @@ class JsonRpcRequest extends Model
             if ($this->paramsPassMethod == Controller::JSON_RPC_PARAMS_PASS_BODY) {
                 $app->request->setBodyParams($this->params);
                 $app->request->setRawBody(Json::encode($this->params));
-                $result = $app->runAction($routeParsed);
+                $result = $app->runAction($routeParsed, $params);
             } else {
                 if (ArrayHelper::isAssociative($this->params)) {
                     $params += $this->params;
