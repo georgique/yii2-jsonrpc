@@ -2,6 +2,7 @@
 
 namespace georgique\yii2\jsonrpc;
 
+use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use yii\base\UserException;
 use yii\helpers\ArrayHelper;
 
@@ -26,10 +27,14 @@ class JsonRpcError implements \JsonSerializable
     {
         $this->code = $exception->getCode();
         $this->message = $this->getExceptionMessage($exception);
+
         $this->data = [];
+        if ($exception instanceof JsonRpcException && !empty($exception->getData())) {
+            $this->data = $exception->getData();
+        }
 
         if (defined('YII_DEBUG') && YII_DEBUG) {
-            $this->data = $this->convertExceptionToArray($exception);
+            $this->data['exception'] = $this->convertExceptionToArray($exception);
         }
 
         // We need to provide client with an original error message

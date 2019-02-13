@@ -187,11 +187,11 @@ class JsonRpcRequest extends Model
         } catch (JsonRpcException $e) {
             throw $e;
         } catch (BadRequestHttpException $e) {
-            throw new InvalidParamsException('Invalid params', $e);
+            throw new InvalidParamsException('Invalid params', [], $e);
         } catch (InvalidRouteException $e) {
-            throw new MethodNotFoundException('Method not found: ' . $route . '.', $e);
+            throw new MethodNotFoundException('Method not found: ' . $route . '.', [], $e);
         } catch (\Exception $e) {
-            throw new InternalErrorException('Internal error', $e);
+            throw new InternalErrorException('Internal error', [], $e);
         }
         return $result;
     }

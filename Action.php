@@ -55,7 +55,7 @@ class Action extends \yii\base\Action
 
             return $parameters;
         } catch (InvalidArgumentException $e) {
-            throw new ParseErrorException('', $e);
+            throw new ParseErrorException('', [], $e);
         }
     }
 
@@ -120,9 +120,11 @@ class Action extends \yii\base\Action
                         }
                         throw new InvalidRequestException();
                     }
-                } catch (InvalidRequestException $e) {
+                }
+                catch (InvalidRequestException $e) {
                     $batchResponse[] = new ErrorResponse($e, $request ?: null);
-                } catch (JsonRpcException $e) {
+                }
+                catch (JsonRpcException $e) {
                     // We do not return response to notifications
                     if ($request && !is_null($request->id)) {
                         $batchResponse[] = new ErrorResponse($e, $request ?: null);

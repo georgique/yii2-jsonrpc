@@ -2,6 +2,7 @@
 
 namespace georgique\yii2\jsonrpc\exceptions;
 
+use Throwable;
 use yii\base\Exception;
 
 /**
@@ -10,6 +11,16 @@ use yii\base\Exception;
  */
 class JsonRpcException extends Exception
 {
+
+    protected $data;
+
+    public function __construct($message = "", $code = 0, $data = [], \Exception $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+
+        $this->data = $data;
+    }
+
     /**
      * @inheritdoc
      */
@@ -20,5 +31,9 @@ class JsonRpcException extends Exception
         } else {
             return 'JSON-RPC Error';
         }
+    }
+
+    public function getData() {
+        return $this->data;
     }
 }

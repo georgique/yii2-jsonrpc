@@ -10,9 +10,9 @@ class MethodNotFoundException extends JsonRpcException
 {
     const CODE = -32601;
 
-    public function __construct($message = "", \Exception $previous = null)
+    public function __construct($message = "", $data = [], \Exception $previous = null)
     {
-        parent::__construct($message, static::CODE, $previous);
+        parent::__construct($message, static::CODE, $data, $previous);
     }
 
     /**

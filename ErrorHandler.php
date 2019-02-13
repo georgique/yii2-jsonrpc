@@ -36,7 +36,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
         }
 
         $response->setStatusCode(200);
-        $response->data = new ErrorResponse(new InternalErrorException('Error while processing request', $exception));
+        $response->data = new ErrorResponse(new InternalErrorException('Error while processing request', [], $exception));
         $response->send();
     }
 
