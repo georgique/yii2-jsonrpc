@@ -39,6 +39,7 @@ class JsonRpcError implements \JsonSerializable
 
         // We need to provide client with an original error message
         $this->data['human_message'] = ($exception->getPrevious()) ? $exception->getPrevious()->getMessage() : $exception->getMessage();
+        $this->data['error_code'] = ($exception->getPrevious()) ? $exception->getPrevious()->getCode() : null;
     }
 
     /**
