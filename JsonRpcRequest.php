@@ -14,6 +14,7 @@ use yii\helpers\Json;
 use yii\web\Application;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * Class JsonRpcRequest
@@ -193,6 +194,16 @@ class JsonRpcRequest extends Model
         } catch (\Exception $e) {
             throw new InternalErrorException('Internal error', [], $e);
         }
+
+        if (is_null($result)) {
+            // in case we don't have any response (e.g. notification request)
+            // we should return nothing
+            // without this fix json response formatter will return 'null'
+            \Yii::$app->response->format = Response::FORMAT_RAW;
+            \Yii::$app->response->data = null;
+            \Yii::$app->end();
+        }
+
         return $result;
     }
 }
