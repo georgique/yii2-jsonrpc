@@ -148,9 +148,10 @@ class JsonRpcRequest extends Model
         }
 
         try {
-            // Replacing requested URL and path info
+            // Replacing requested URL, path info and base url
             $app->request->setUrl($route);
-            \Yii::$app->request->setPathInfo(null);
+            $app->request->setPathInfo(null);
+            $app->request->setBaseUrl(null);
 
             try {
                 $routeWithParams = $app->request->resolve();

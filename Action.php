@@ -77,6 +77,7 @@ class Action extends \yii\base\Action
     {
         \Yii::$app->request->setUrl($this->originalYiiRequest->getUrl());
         \Yii::$app->request->setPathInfo($this->originalYiiRequest->getPathInfo());
+        \Yii::$app->request->setBaseUrl($this->originalYiiRequest->getBaseUrl());
         \Yii::$app->request->setBodyParams($this->originalYiiRequest->getBodyParams());
         \Yii::$app->request->setQueryParams($this->originalYiiRequest->getQueryParams());
         \Yii::$app->request->setRawBody($this->originalYiiRequest->getRawBody());
