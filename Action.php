@@ -134,8 +134,12 @@ class Action extends \yii\base\Action
 
                 $this->restoreYiiRequest();
             }
-        } catch (JsonRpcException $e) {
+        }
+        catch (JsonRpcException $e) {
             return new ErrorResponse($e);
+        }
+        catch (\Throwable $e) {
+            return new InternalErrorException('Error while processing request', [], $e);
         }
 
         return !$isBatch ? array_shift($batchResponse) : $batchResponse;

@@ -73,7 +73,7 @@ class DemoController extends Controller
      * @param int $b
      * @return int
      */
-    public function actionSum($a, $b)
+    public function actionSum(int $a, int $b)
     {
         return $a + $b;
     }

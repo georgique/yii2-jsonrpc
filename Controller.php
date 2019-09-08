@@ -54,13 +54,4 @@ class Controller extends \yii\web\Controller
         ];
     }
 
-    /**
-     * @throws \yii\base\InvalidConfigException
-     */
-    public function init()
-    {
-        Yii::$app->set('errorHandler', ['class' => ErrorHandler::class]);
-        Yii::$app->getErrorHandler()->register();
-        parent::init();
-    }
 }

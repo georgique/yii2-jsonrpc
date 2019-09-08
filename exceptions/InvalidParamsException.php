@@ -10,7 +10,7 @@ class InvalidParamsException extends JsonRpcException
 {
     const CODE = -32602;
 
-    public function __construct($message = "", $data = [], \Exception $previous = null)
+    public function __construct(string $message = "", $data = [], \Throwable $previous = null)
     {
         parent::__construct($message, static::CODE, $data, $previous);
     }
