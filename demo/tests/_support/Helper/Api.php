@@ -22,7 +22,7 @@ class Api extends \Codeception\Module
 
         \PHPUnit\Framework\Assert::assertThat(
             $response,
-            JsonEquals($json)
+            new JsonEquals($json)
         );
     }
 }
