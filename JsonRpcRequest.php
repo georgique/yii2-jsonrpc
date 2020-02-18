@@ -2,6 +2,7 @@
 
 namespace georgique\yii2\jsonrpc;
 
+use georgique\yii2\jsonrpc\exceptions\InvalidRequestException;
 use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\InternalErrorException;
 use georgique\yii2\jsonrpc\exceptions\InvalidParamsException;
@@ -15,6 +16,7 @@ use yii\web\Application;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UnauthorizedHttpException;
 
 /**
  * Class JsonRpcRequest
@@ -186,6 +188,8 @@ class JsonRpcRequest extends Model
 
                 $result = $app->runAction($routeParsed, $params);
             }
+        } catch (UnauthorizedHttpException $e) {
+          throw new InvalidRequestException("Unauthorized",  [], $e);
         } catch (JsonRpcException $e) {
             throw $e;
         } catch (BadRequestHttpException $e) {
