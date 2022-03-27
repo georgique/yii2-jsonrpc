@@ -94,7 +94,7 @@ class JsonRpcRequest extends Model
             }
         }
 
-        return implode($parts, '/');
+        return implode('/', $parts);
     }
 
     /**
