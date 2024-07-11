@@ -13,11 +13,12 @@ therefore giving you Yii2 power fully.
 
 ## Usage
 Entry point:
+
 ```php
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\jsonrpc\Controller;
+use georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcController extends Controller {
 
@@ -28,11 +29,12 @@ class JsonRpcController extends Controller {
 ```
 
 Entry point with different way to pass params:
+
 ```php
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\jsonrpc\Controller;
+use georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcBodyController extends Controller {
 

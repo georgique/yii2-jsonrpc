@@ -2,9 +2,9 @@
 
 namespace georgique\yii2\jsonrpc;
 
-use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\InternalErrorException;
 use georgique\yii2\jsonrpc\exceptions\InvalidRequestException;
+use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\ParseErrorException;
 use georgique\yii2\jsonrpc\responses\ErrorResponse;
 use georgique\yii2\jsonrpc\responses\SuccessResponse;

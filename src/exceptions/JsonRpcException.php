@@ -2,7 +2,6 @@
 
 namespace georgique\yii2\jsonrpc\exceptions;
 
-use Throwable;
 use yii\base\Exception;
 
 /**

@@ -1,7 +1,6 @@
 <?php
 namespace api\tests;
 
-use georgique\yii2\jsonrpc\exceptions\ParseErrorException;
 use tests\Tester;
 use yii\helpers\Json;
 

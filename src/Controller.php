@@ -4,7 +4,6 @@ namespace georgique\yii2\jsonrpc;
 
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
-use Yii;
 
 /**
  * Class Controller

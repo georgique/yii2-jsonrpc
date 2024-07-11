@@ -2,10 +2,10 @@
 
 namespace georgique\yii2\jsonrpc;
 
-use georgique\yii2\jsonrpc\exceptions\InvalidRequestException;
-use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\InternalErrorException;
 use georgique\yii2\jsonrpc\exceptions\InvalidParamsException;
+use georgique\yii2\jsonrpc\exceptions\InvalidRequestException;
+use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\MethodNotFoundException;
 use yii\base\InlineAction;
 use yii\base\InvalidRouteException;
@@ -138,8 +138,8 @@ class JsonRpcRequest extends Model
 
     /**
      * Executes JSON-RPC request by route.
-     * @throws \georgique\yii2\jsonrpc\exceptions\JsonRpcException
      * @return mixed
+     * @throws \georgique\yii2\jsonrpc\exceptions\JsonRpcException
      */
     public function execute()
     {

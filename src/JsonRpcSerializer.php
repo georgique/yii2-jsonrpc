@@ -4,7 +4,6 @@ namespace georgique\yii2\jsonrpc;
 
 use georgique\yii2\jsonrpc\exceptions\InternalErrorException;
 use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
-use georgique\yii2\jsonrpc\JsonRpcError;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\Component;

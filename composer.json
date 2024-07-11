@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "georgique\\yii2\\jsonrpc\\": ""
+      "georgique\\yii2\\jsonrpc\\": "src/"
     }
   },
   "repositories": [
