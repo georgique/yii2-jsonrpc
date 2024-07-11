@@ -21,11 +21,18 @@
     }
   ],
   "require": {
-    "php": "~7.0",
+    "php": ">=7.0 || >= 8.0",
+    "ext-json": "*",
     "yiisoft/yii2": "~2.0.15"
   },
   "require-dev": {
-    "codeception/codeception": "~2.4",
-    "flow/jsonpath": "^0.4.0"
+    "codeception/codeception": "^4.2",
+    "codeception/module-rest": "^2.0",
+    "codeception/module-yii2": "^1.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
   }
 }
