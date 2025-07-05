@@ -11,7 +11,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "georgique\\yii2\\jsonrpc\\": ""
+      "georgique\\yii2\\jsonrpc\\": "src/",
+      "georgique\\yii2\\jsonrpc\\tests": "tests/"
     }
   },
   "repositories": [
@@ -21,11 +22,18 @@
     }
   ],
   "require": {
-    "php": "~7.0",
-    "yiisoft/yii2": "~2.0.15"
+    "php": ">= 8.1",
+    "ext-json": "*",
+    "yiisoft/yii2": "^2.0"
   },
   "require-dev": {
-    "codeception/codeception": "~2.4",
-    "flow/jsonpath": "^0.4.0"
+    "codeception/codeception": "^5.0",
+    "codeception/module-rest": "^3.0",
+    "codeception/module-yii2": "^1.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
   }
 }

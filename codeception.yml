@@ -1,7 +1,14 @@
-# global codeception file to run tests from all apps
-include:
-    - demo
+actor: Tester
+bootstrap: _bootstrap.php
 paths:
-    log: demo/runtime/logs
+    tests: tests
+    data: tests/_data
+    helpers: tests/support
+    output: tests/_output
 settings:
-    colors: false
+    colors: true
+    memory_limit: 1024M
+modules:
+    config:
+        Yii2:
+            configFile: 'demo/config/main.php'

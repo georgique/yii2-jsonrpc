@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use \georgique\yii2\jsonrpc\Controller;
+use georgique\yii2\jsonrpc\Controller;
 
 class ObjectParamsJsonRpcController extends Controller
 {

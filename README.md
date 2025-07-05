@@ -1,6 +1,7 @@
 # Yii2 JSON-RPC
 
-Yii2 extension for JSON-RPC server implementation. Works not as Remote Procedure Call, but Remote Action Call, therefor leaves all Yii2 power for your service.
+Yii2 extension for JSON-RPC server implementation. Works not as Remote Procedure Call, but rather Remote Action Call, 
+therefore giving you Yii2 power fully.
 
 [![Build Status](https://travis-ci.org/georgique/yii2-jsonrpc.svg?branch=master)](https://travis-ci.org/georgique/yii2-jsonrpc)
 
@@ -12,11 +13,12 @@ Yii2 extension for JSON-RPC server implementation. Works not as Remote Procedure
 
 ## Usage
 Entry point:
+
 ```php
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\jsonrpc\Controller;
+use georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcController extends Controller {
 
@@ -27,11 +29,12 @@ class JsonRpcController extends Controller {
 ```
 
 Entry point with different way to pass params:
+
 ```php
 <?php
 
 namespace app\controllers;
-use \georgique\yii2\jsonrpc\Controller;
+use georgique\yii2\jsonrpc\Controller;
 
 class JsonRpcBodyController extends Controller {
 
