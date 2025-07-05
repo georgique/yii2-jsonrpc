@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use yii\base\InvalidConfigException;
 use yii\web\Controller;
 
 class DemoController extends Controller
@@ -17,8 +18,8 @@ class DemoController extends Controller
     }
 
     /**
-     * @param $params
-     * @return mixed
+     * @param array $params
+     * @return array
      */
     public function actionEcho(array $params)
     {
@@ -79,8 +80,8 @@ class DemoController extends Controller
     }
 
     /**
-     * @return mixed
-     * @throws \yii\base\InvalidConfigException
+     * @return int
+     * @throws InvalidConfigException
      */
     public function actionSumIntegerList()
     {
@@ -93,12 +94,12 @@ class DemoController extends Controller
 
     /**
      * @return string
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function actionDumpRequest()
     {
         $output = "Params received: ";
-        $output_chunks = array();
+        $output_chunks = [];
         foreach (\Yii::$app->request->getBodyParams() as $name => $value) {
             $output_chunks[] = "$name = $value\n";
         }

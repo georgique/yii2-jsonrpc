@@ -8,9 +8,9 @@ namespace georgique\yii2\jsonrpc\exceptions;
  */
 class InvalidParamsException extends JsonRpcException
 {
-    const CODE = -32602;
+    public const CODE = -32602;
 
-    public function __construct(string $message = "", $data = [], \Throwable $previous = null)
+    public function __construct(string $message = "", $data = [], ?\Throwable $previous = null)
     {
         parent::__construct($message, static::CODE, $data, $previous);
     }

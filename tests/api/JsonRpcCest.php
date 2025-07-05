@@ -1,7 +1,7 @@
 <?php
-namespace api\tests;
+namespace georgique\yii2\jsonrpc\tests\api;
 
-use tests\Tester;
+use Tester;
 use yii\helpers\Json;
 
 class JsonRpcCest
@@ -10,7 +10,7 @@ class JsonRpcCest
     {
         $I->wantTo('Check that demo setup is working');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', [
+        $I->sendPost('json-rpc', [
             "jsonrpc" => "2.0",
             "method" => "demo.some-method",
             "id" => 1
@@ -26,7 +26,7 @@ class JsonRpcCest
     {
         $I->wantTo('Check method with params');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 {"jsonrpc": "2.0", "method": "demo.method-with-params", "params": {"bar": "123", "foo": "baz"}, "id": 1}
 JSON
         );
@@ -42,7 +42,7 @@ JSON
     {
         $I->wantTo('Check empty response for notification');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 {"jsonrpc": "2.0", "method": "demo.notification", "params": {"foo": true}}
 JSON
         );

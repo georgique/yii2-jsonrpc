@@ -12,10 +12,10 @@ use yii\web\Response;
 class Controller extends \yii\web\Controller
 {
     // Pass params as function arguments
-    const JSON_RPC_PARAMS_PASS_FUNCARGS = 1;
+    public const JSON_RPC_PARAMS_PASS_FUNCARGS = 1;
 
     // Pass params as request body
-    const JSON_RPC_PARAMS_PASS_BODY = 2;
+    public const JSON_RPC_PARAMS_PASS_BODY = 2;
 
     /**
      * @var int $paramsPassMethod Defines method to pass params to the target action.

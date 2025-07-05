@@ -1,12 +1,14 @@
 <?php
 
-namespace tests;
+namespace georgique\yii2\jsonrpc\tests\support;
 
 use Codeception\PHPUnit\Constraint\JsonContains;
-use SebastianBergmann\Comparator\ComparisonFailure;
-use SebastianBergmann\Comparator\ArrayComparator;
-use SebastianBergmann\Comparator\Factory;
 use Codeception\Util\JsonArray;
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\Comparator\ArrayComparator;
+use SebastianBergmann\Comparator\ComparisonFailure;
+use SebastianBergmann\Comparator\Factory;
 
 class JsonEquals extends JsonContains
 {
@@ -19,19 +21,19 @@ class JsonEquals extends JsonContains
      *
      * @return bool
      */
-    protected function matches($other) : bool
+    protected function matches($other): bool
     {
         $jsonResponseArray = new JsonArray($other);
         if (!is_array($jsonResponseArray->toArray())) {
-            throw new \PHPUnit\Framework\AssertionFailedError('JSON response is not an array: ' . $other);
+            throw new AssertionFailedError('JSON response is not an array: ' . $other);
         }
 
         $comparator = new ArrayComparator();
-        $comparator->setFactory(new Factory);
+        $comparator->setFactory(new Factory());
         try {
             $comparator->assertEquals($this->expected, $jsonResponseArray->toArray());
         } catch (ComparisonFailure $failure) {
-            throw new \PHPUnit\Framework\ExpectationFailedException(
+            throw new ExpectationFailedException(
                 "Response JSON does not contain the provided JSON\n",
                 $failure
             );

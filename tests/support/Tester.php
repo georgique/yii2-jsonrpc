@@ -1,10 +1,14 @@
 <?php
-namespace tests;
+
+declare(strict_types=1);
+
+use Codeception\Actor;
+
 
 /**
  * Inherited Methods
- * @method void wantToTest($text)
  * @method void wantTo($text)
+ * @method void wantToTest($text)
  * @method void execute($callable)
  * @method void expectTo($prediction)
  * @method void expect($prediction)
@@ -12,11 +16,12 @@ namespace tests;
  * @method void am($role)
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
- * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method void pause($vars = [])
+ * @method void seeResponseEqualsJson($json = [])
  *
  * @SuppressWarnings(PHPMD)
 */
-class Tester extends \Codeception\Actor
+class Tester extends Actor
 {
     use _generated\TesterActions;
 

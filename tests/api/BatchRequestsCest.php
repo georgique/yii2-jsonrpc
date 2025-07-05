@@ -1,7 +1,7 @@
 <?php
-namespace api\tests;
+namespace georgique\yii2\jsonrpc\tests\api;
 
-use tests\Tester;
+use Tester;
 use yii\helpers\Json;
 
 class BatchRequestsCest
@@ -10,12 +10,12 @@ class BatchRequestsCest
     {
         $I->wantTo('Check that simple batch request is working');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
-[
-	{"jsonrpc": "2.0", "method": "demo.some-method", "id": 1},
-	{"jsonrpc": "2.0", "method": "demo.method-with-params", "params": {"foo": "fubar", "bar": "baz"}, "id": 4}
-]
-JSON
+        $I->sendPost('json-rpc', <<<JSON
+        [
+            {"jsonrpc": "2.0", "method": "demo.some-method", "id": 1},
+            {"jsonrpc": "2.0", "method": "demo.method-with-params", "params": {"foo": "fubar", "bar": "baz"}, "id": 4}
+        ]
+        JSON
         );
         $I->seeResponseCodeIs(200);
 
@@ -29,7 +29,7 @@ RESPONSE
     {
         $I->wantTo('Check different params style: named and non-named');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 [
 	{"jsonrpc": "2.0", "method": "demo.sum", "params": [10, 5], "id": 1},
 	{"jsonrpc": "2.0", "method": "demo.sum", "params": {"a": 5, "b": 3}, "id": 2},
@@ -49,7 +49,7 @@ RESPONSE
     {
         $I->wantTo('Check success + error');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 [
 	{"jsonrpc": "2.0", "method": "demo.some-method", "id": 1},
 	{"jsonrpc": "2.0", "method": "demo.method-with-params", "params": {"invalid-params-here": true}, "id": 4}
@@ -71,7 +71,7 @@ RESPONSE
     {
         $I->wantTo('Check success + error + silent notification');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 [
 	{"jsonrpc": "2.0", "method": "demo.some-method", "id": 1},
 	{"jsonrpc": "2.0", "method": "demo.method-with-params", "params": {"invalid-params-here": true}, "id": 4},
@@ -94,7 +94,7 @@ RESPONSE
     {
         $I->wantTo('Check 2 errors');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 [
 	{"jsonrpc": "1.99", "method": "demo.some-method", "id": 1},
 	{"jsonrpc": "2.0", "method": "missing", "id": 4}
@@ -112,11 +112,14 @@ RESPONSE
         ));
     }
 
+    /**
+     * @noinspection Annotator
+     */
     public function checkParseError(Tester $I)
     {
         $I->wantTo('Check parse error with batch request');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', <<<JSON
+        $I->sendPost('json-rpc', <<<JSON
 [
 	{"jsonrpc": "2.0", "method": "demo.some-method", "id": 1}
 	invalid json
@@ -136,7 +139,7 @@ RESPONSE
     {
         $I->wantTo('Check invalid batch');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', '[1, 2, 3]');
+        $I->sendPost('json-rpc', '[1, 2, 3]');
         $I->seeResponseCodeIs(200);
 
         $I->seeResponseContainsJson(Json::decode(<<<RESPONSE
@@ -153,7 +156,7 @@ RESPONSE
     {
         $I->wantTo('Check empty array');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('json-rpc', '[]');
+        $I->sendPost('json-rpc', '[]');
         $I->seeResponseCodeIs(200);
 
         $I->seeResponseContainsJson(Json::decode(<<<RESPONSE

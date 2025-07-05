@@ -3,6 +3,7 @@
 namespace georgique\yii2\jsonrpc\responses;
 
 use georgique\yii2\jsonrpc\JsonRpcRequest;
+use ReturnTypeWillChange;
 
 /**
  * Class SuccessResponse
@@ -27,8 +28,9 @@ class SuccessResponse extends JsonRpcResponse
     }
 
     /**
-     * @return array|mixed
+     * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         // just for nice output order

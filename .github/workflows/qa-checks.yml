@@ -19,11 +19,10 @@ jobs:
         php: [8.1, 8.2, 8.3]
     steps:
       - name: Composer prepare
-        run: |
-          composer self-update && composer --version
-          composer update --dev --prefer-dist --no-interaction
+        run: composer update
 
       - name: Run tests
         run: |
           php -S localhost:8080 -t demo/web > /dev/null 2>&1 &
+          vendor/bin/codecept build
           vendor/bin/codecept run

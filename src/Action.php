@@ -9,6 +9,7 @@ use georgique\yii2\jsonrpc\exceptions\ParseErrorException;
 use georgique\yii2\jsonrpc\responses\ErrorResponse;
 use georgique\yii2\jsonrpc\responses\SuccessResponse;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Request;
@@ -71,7 +72,7 @@ class Action extends \yii\base\Action
 
     /**
      * @return $this
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     protected function restoreYiiRequest()
     {

@@ -8,8 +8,8 @@ namespace georgique\yii2\jsonrpc\exceptions;
  */
 class InternalErrorException extends JsonRpcException
 {
-    const CODE = -32603;
-    public function __construct(string $message = "", $data = [], \Throwable $previous = null)
+    public const CODE = -32603;
+    public function __construct(string $message = "", $data = [], ?\Throwable $previous = null)
     {
         parent::__construct($message, static::CODE, $data, $previous);
     }

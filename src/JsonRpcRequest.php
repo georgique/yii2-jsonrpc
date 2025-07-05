@@ -8,6 +8,7 @@ use georgique\yii2\jsonrpc\exceptions\InvalidRequestException;
 use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
 use georgique\yii2\jsonrpc\exceptions\MethodNotFoundException;
 use yii\base\InlineAction;
+use yii\base\InvalidConfigException;
 use yii\base\InvalidRouteException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -101,7 +102,7 @@ class JsonRpcRequest extends Model
      * @param $route
      * @param array $params
      * @throws \ReflectionException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @throws InvalidRouteException
      */
     public function bindParamsArray($route, array $params)
@@ -113,7 +114,7 @@ class JsonRpcRequest extends Model
             throw new InvalidRouteException('Unable to resolve request "' . $route . '"');
         }
 
-        /* @var $controller Controller */
+        /* @var Controller $controller */
         list($controller, $actionID) = $parts;
         $action = $controller->createAction($actionID);
         if ($action === null) {
@@ -139,7 +140,7 @@ class JsonRpcRequest extends Model
     /**
      * Executes JSON-RPC request by route.
      * @return mixed
-     * @throws \georgique\yii2\jsonrpc\exceptions\JsonRpcException
+     * @throws JsonRpcException
      */
     public function execute()
     {
@@ -157,7 +158,7 @@ class JsonRpcRequest extends Model
 
             try {
                 $routeWithParams = $app->request->resolve();
-            } catch (NotFoundHttpException $exception) {
+            } catch (NotFoundHttpException) {
                 $routeWithParams = false;
             }
 

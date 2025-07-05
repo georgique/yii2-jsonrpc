@@ -6,6 +6,6 @@ modules:
             url: /
             depends: Yii2
             part: Json
-        - \tests\Helper\Api
+        - \Helper\Api
     config:
         - Yii2

@@ -3,7 +3,9 @@
 namespace georgique\yii2\jsonrpc;
 
 use georgique\yii2\jsonrpc\exceptions\JsonRpcException;
+use ReturnTypeWillChange;
 use yii\base\UserException;
+use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -45,6 +47,7 @@ class JsonRpcError implements \JsonSerializable
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $fields = ArrayHelper::toArray($this);
@@ -83,7 +86,7 @@ class JsonRpcError implements \JsonSerializable
                 'stack-trace' => explode("\n", $exception->getTraceAsString())
             ];
 
-            if ($exception instanceof \yii\db\Exception) {
+            if ($exception instanceof Exception) {
                 $errorArray['error-info'] = $exception->errorInfo;
             }
         }

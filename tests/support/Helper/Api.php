@@ -1,13 +1,16 @@
 <?php
-namespace tests\Helper;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
 
-use Codeception\Exception\ModuleException;
-use tests\JsonEquals;
+namespace Helper;
 
-class Api extends \Codeception\Module
+use Codeception\Exception\ModuleException;
+use Codeception\Module;
+use georgique\yii2\jsonrpc\tests\support\JsonEquals;
+use PHPUnit\Framework\Assert;
+
+class Api extends Module
 {
     /**
      * @param array $json
@@ -16,11 +19,11 @@ class Api extends \Codeception\Module
     {
         try {
             $response = $this->getModule('REST')->response;
-        } catch (ModuleException $e) {
+        } catch (ModuleException) {
             $response = null;
         }
 
-        \PHPUnit\Framework\Assert::assertThat(
+        Assert::assertThat(
             $response,
             new JsonEquals($json)
         );
