@@ -12,7 +12,7 @@
   "autoload": {
     "psr-4": {
       "georgique\\yii2\\jsonrpc\\": "src/",
-      "georgique\\yii2\\jsonrpc\\tests": "tests/"
+      "georgique\\yii2\\jsonrpc\\tests\\": "tests/"
     }
   },
   "repositories": [
